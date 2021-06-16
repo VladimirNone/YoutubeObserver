@@ -1,0 +1,17 @@
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Infrastructure\bin\Debug\net5.0\YoutubeTelegramBot.Infrastructure.deps.json
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Infrastructure\bin\Debug\net5.0\YoutubeTelegramBot.Infrastructure.dll
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Infrastructure\bin\Debug\net5.0\ref\YoutubeTelegramBot.Infrastructure.dll
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Infrastructure\bin\Debug\net5.0\YoutubeTelegramBot.Infrastructure.pdb
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Infrastructure\bin\Debug\net5.0\YoutubeTelegramBot.Domain.dll
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Infrastructure\bin\Debug\net5.0\YoutubeTelegramBot.Repositories.dll
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Infrastructure\bin\Debug\net5.0\YoutubeTelegramBot.Repositories.pdb
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Infrastructure\bin\Debug\net5.0\YoutubeTelegramBot.Domain.pdb
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Infrastructure\obj\Debug\net5.0\YoutubeTelegramBot.Infrastructure.csproj.AssemblyReference.cache
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Infrastructure\obj\Debug\net5.0\YoutubeTelegramBot.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Infrastructure\obj\Debug\net5.0\YoutubeTelegramBot.Infrastructure.AssemblyInfoInputs.cache
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Infrastructure\obj\Debug\net5.0\YoutubeTelegramBot.Infrastructure.AssemblyInfo.cs
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Infrastructure\obj\Debug\net5.0\YoutubeTelegramBot.Infrastructure.csproj.CoreCompileInputs.cache
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Infrastructure\obj\Debug\net5.0\YoutubeTelegramBot.Infrastructure.csproj.CopyComplete
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Infrastructure\obj\Debug\net5.0\YoutubeTelegramBot.Infrastructure.dll
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Infrastructure\obj\Debug\net5.0\ref\YoutubeTelegramBot.Infrastructure.dll
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Infrastructure\obj\Debug\net5.0\YoutubeTelegramBot.Infrastructure.pdb

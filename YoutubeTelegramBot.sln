@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31321.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YoutubeTelegramBot", "YoutubeTelegramBot\YoutubeTelegramBot.csproj", "{A7556D20-1BF5-4222-8043-2B45399E970D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YoutubeTelegramBot.Domain", "YoutubeTelegramBot.Domain\YoutubeTelegramBot.Domain.csproj", "{5E0CAED2-8250-4EE1-9C8F-11A39F4C448A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YoutubeTelegramBot.Infrastructure", "YoutubeTelegramBot.Infrastructure\YoutubeTelegramBot.Infrastructure.csproj", "{7DC07F68-CD3C-4679-93B4-CF761AB6B0E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YoutubeTelegramBot.Repositories", "YoutubeTelegramBot.Repositories\YoutubeTelegramBot.Repositories.csproj", "{A0C564E5-FCEF-471B-B8AB-9A8210DD83FB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A7556D20-1BF5-4222-8043-2B45399E970D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7556D20-1BF5-4222-8043-2B45399E970D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7556D20-1BF5-4222-8043-2B45399E970D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7556D20-1BF5-4222-8043-2B45399E970D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E0CAED2-8250-4EE1-9C8F-11A39F4C448A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E0CAED2-8250-4EE1-9C8F-11A39F4C448A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E0CAED2-8250-4EE1-9C8F-11A39F4C448A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E0CAED2-8250-4EE1-9C8F-11A39F4C448A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DC07F68-CD3C-4679-93B4-CF761AB6B0E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DC07F68-CD3C-4679-93B4-CF761AB6B0E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DC07F68-CD3C-4679-93B4-CF761AB6B0E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DC07F68-CD3C-4679-93B4-CF761AB6B0E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0C564E5-FCEF-471B-B8AB-9A8210DD83FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0C564E5-FCEF-471B-B8AB-9A8210DD83FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0C564E5-FCEF-471B-B8AB-9A8210DD83FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0C564E5-FCEF-471B-B8AB-9A8210DD83FB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E9A4FC64-6B99-4081-AF2E-76AE382C39A4}
+	EndGlobalSection
+EndGlobal

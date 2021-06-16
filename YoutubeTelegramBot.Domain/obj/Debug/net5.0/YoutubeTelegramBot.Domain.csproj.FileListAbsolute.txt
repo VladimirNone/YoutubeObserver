@@ -1,0 +1,12 @@
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Domain\bin\Debug\net5.0\YoutubeTelegramBot.Domain.deps.json
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Domain\bin\Debug\net5.0\YoutubeTelegramBot.Domain.dll
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Domain\bin\Debug\net5.0\ref\YoutubeTelegramBot.Domain.dll
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Domain\bin\Debug\net5.0\YoutubeTelegramBot.Domain.pdb
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Domain\obj\Debug\net5.0\YoutubeTelegramBot.Domain.csproj.AssemblyReference.cache
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Domain\obj\Debug\net5.0\YoutubeTelegramBot.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Domain\obj\Debug\net5.0\YoutubeTelegramBot.Domain.AssemblyInfoInputs.cache
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Domain\obj\Debug\net5.0\YoutubeTelegramBot.Domain.AssemblyInfo.cs
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Domain\obj\Debug\net5.0\YoutubeTelegramBot.Domain.csproj.CoreCompileInputs.cache
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Domain\obj\Debug\net5.0\YoutubeTelegramBot.Domain.dll
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Domain\obj\Debug\net5.0\ref\YoutubeTelegramBot.Domain.dll
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Domain\obj\Debug\net5.0\YoutubeTelegramBot.Domain.pdb

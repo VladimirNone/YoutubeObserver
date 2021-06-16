@@ -1,0 +1,15 @@
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Repositories\bin\Debug\net5.0\YoutubeTelegramBot.Repositories.deps.json
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Repositories\bin\Debug\net5.0\YoutubeTelegramBot.Repositories.dll
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Repositories\bin\Debug\net5.0\ref\YoutubeTelegramBot.Repositories.dll
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Repositories\bin\Debug\net5.0\YoutubeTelegramBot.Repositories.pdb
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Repositories\bin\Debug\net5.0\YoutubeTelegramBot.Domain.dll
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Repositories\bin\Debug\net5.0\YoutubeTelegramBot.Domain.pdb
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Repositories\obj\Debug\net5.0\YoutubeTelegramBot.Repositories.csproj.AssemblyReference.cache
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Repositories\obj\Debug\net5.0\YoutubeTelegramBot.Repositories.GeneratedMSBuildEditorConfig.editorconfig
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Repositories\obj\Debug\net5.0\YoutubeTelegramBot.Repositories.AssemblyInfoInputs.cache
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Repositories\obj\Debug\net5.0\YoutubeTelegramBot.Repositories.AssemblyInfo.cs
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Repositories\obj\Debug\net5.0\YoutubeTelegramBot.Repositories.csproj.CoreCompileInputs.cache
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Repositories\obj\Debug\net5.0\YoutubeTelegramBot.Repositories.csproj.CopyComplete
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Repositories\obj\Debug\net5.0\YoutubeTelegramBot.Repositories.dll
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Repositories\obj\Debug\net5.0\ref\YoutubeTelegramBot.Repositories.dll
+D:\Programs\YoutubeTelegramBot\YoutubeTelegramBot.Repositories\obj\Debug\net5.0\YoutubeTelegramBot.Repositories.pdb

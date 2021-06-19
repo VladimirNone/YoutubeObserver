@@ -11,10 +11,10 @@ namespace YoutubeTelegramBot.Repositories.Interfaces
 {
     public interface IUnitOfWork
     {
-        YoutubeObserverDbContext Context { get; }
         IVideosRepository VideosRepository { get; }
         IChannelsRepository ChannelsRepository { get; }
 
-        void Commit();
+        Task Commit();
+        Task Rollback();
     }
 }

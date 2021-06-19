@@ -12,8 +12,8 @@ namespace YoutubeTelegramBot.Repositories.Interfaces
     {
         DbSet<T> DbSet { get; }
 
-        void AddEntity(T entity);
+        Task AddEntityAsync(T entity);
         void Update(T entity);
-        T GetEntity(int id);
+        Task<T> GetEntityAsync(int id);
     }
 }

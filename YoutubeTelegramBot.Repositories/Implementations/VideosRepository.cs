@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using YoutubeTelegramBot.Domain.POCOs;
 using YoutubeTelegramBot.Repositories.Interfaces;
 
-namespace YoutubeTelegramBot.Repositories.Repositories
+namespace YoutubeTelegramBot.Repositories.Implementations
 {
     public class VideosRepository : Repository<Video>, IVideosRepository
     {
@@ -15,7 +15,6 @@ namespace YoutubeTelegramBot.Repositories.Repositories
             : base(context)
         {
         }
-
         
     }
 }

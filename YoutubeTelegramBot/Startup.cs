@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 using YoutubeTelegramBot.Infrastructure;
 using YoutubeTelegramBot.Repositories;
 using Newtonsoft.Json;
+using YoutubeTelegramBot.Infrastructure.Telegram.Interfaces;
+using YoutubeTelegramBot.Infrastructure.Youtube.Interfaces;
+using YoutubeTelegramBot.Repositories.Interfaces;
 
 namespace YoutubeTelegramBot
 {
@@ -36,9 +39,7 @@ namespace YoutubeTelegramBot
             services.AddInfrastructure();
             
             
-            services.AddMvc().AddNewtonsoftJson(options => {
-                /*                options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
-                                options.JsonSerializerOptions.WriteIndented = true;*/
+            services.AddControllers().AddNewtonsoftJson(options => {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 options.SerializerSettings.Formatting = Formatting.Indented;
             });

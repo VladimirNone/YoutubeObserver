@@ -19,10 +19,13 @@ namespace YoutubeTelegramBot.Repositories
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Video>().HasKey(h => h.youtube_id);
+
             modelBuilder.Entity<Video>().ToTable("videos");
 
+            modelBuilder.Entity<Channel>().HasKey(h => h.youtube_id);
+            
             modelBuilder.Entity<Channel>().ToTable("channels");
-
         }
     }
 }

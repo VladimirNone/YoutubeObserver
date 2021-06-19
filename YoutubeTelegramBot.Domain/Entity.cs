@@ -8,15 +8,15 @@ namespace YoutubeTelegramBot.Domain
 {
     public abstract class Entity<TId>
     {
-        public virtual TId id { get; protected set; }
+        public virtual TId youtube_id { get; set; }
 
         protected Entity()
         {
         }
 
-        protected Entity(TId id)
+        protected Entity(TId youtube_id)
         {
-            this.id = id;
+            this.youtube_id = youtube_id;
         }
 
 /*        public override bool Equals(object obj)
@@ -58,14 +58,14 @@ namespace YoutubeTelegramBot.Domain
         }*/
     }
 
-    public abstract class Entity : Entity<int>
+    public abstract class Entity : Entity<string>
     {
         protected Entity()
         {
         }
 
-        protected Entity(int id)
-            : base(id)
+        protected Entity(string youtube_id)
+            : base(youtube_id)
         {
         }
     }

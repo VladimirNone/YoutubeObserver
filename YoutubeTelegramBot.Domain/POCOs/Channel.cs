@@ -10,7 +10,8 @@ namespace YoutubeTelegramBot.Domain.POCOs
     public class Channel : Entity
     {
         public string name { get; set; }
-        public short priority { get; set; }
+        public short priority { get; set; } = 1;
+        public DateTime? last_check { get; set; }
 
         [InverseProperty("AuthorOfChannel")]
         public List<Video> Vidoes { get; set; }

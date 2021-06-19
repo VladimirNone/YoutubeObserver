@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using YoutubeTelegramBot.Domain.POCOs;
 using YoutubeTelegramBot.Repositories.Interfaces;
 
-namespace YoutubeTelegramBot.Repositories.Repositories
+namespace YoutubeTelegramBot.Repositories.Implementations
 {
     public class ChannelsRepository : Repository<Channel>, IChannelsRepository
     {
@@ -16,9 +16,9 @@ namespace YoutubeTelegramBot.Repositories.Repositories
         {
         }
 
-        public async Task<Channel> GetChannelWithVideosAsync(int channelId)
-        { 
-            return await DbSet.AsNoTracking().Include(h => h.Vidoes).FirstAsync(h=>h.id == channelId);
+        public async Task<Channel> GetEntityAsync(string id)
+        {
+            return await DbSet.AsNoTracking().Include(h => h.Vidoes).FirstAsync(h => h.youtube_id == id);
         }
     }
 }

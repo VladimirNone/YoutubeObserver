@@ -8,4 +8,9 @@
     <ProjectReference Include="..\YoutubeTelegramBot.Repositories\YoutubeTelegramBot.Repositories.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Google.Apis.YouTube.v3" Version="1.52.0.2343" />
+    <PackageReference Include="Telegram.Bot" Version="16.0.0" />
+  </ItemGroup>
+
 </Project>

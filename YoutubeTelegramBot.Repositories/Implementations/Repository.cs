@@ -8,7 +8,7 @@ using YoutubeTelegramBot.Domain;
 using YoutubeTelegramBot.Domain.POCOs;
 using YoutubeTelegramBot.Repositories.Interfaces;
 
-namespace YoutubeTelegramBot.Repositories.Repositories
+namespace YoutubeTelegramBot.Repositories.Implementations
 {
     public abstract class Repository<T> : IRepository<T> where T: Entity
     {
@@ -19,19 +19,21 @@ namespace YoutubeTelegramBot.Repositories.Repositories
             DbSet = dbContext.Set<T>();
         }
 
-        public void AddEntity(T entity)
+        public virtual async Task AddEntityAsync(T entity)
         {
-            DbSet.Add(entity);
+            if (entity == null) throw new ArgumentNullException("entity");
+            await DbSet.AddAsync(entity);
         }
 
-        public void Update(T entity)
+        public virtual void Update(T entity)
         {
+            if (entity == null) throw new ArgumentNullException("entity");
             DbSet.Update(entity);
         }
 
-        public T GetEntity(int id)
+        public virtual async Task<T> GetEntityAsync(int id)
         {
-            return DbSet.Find(id);
+            return await DbSet.FindAsync(id);
         }
     }
 }

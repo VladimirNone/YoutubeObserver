@@ -15,6 +15,6 @@ namespace YoutubeTelegramBot.Repositories.Implementations
             : base(context)
         {
         }
-        
+
     }
 }

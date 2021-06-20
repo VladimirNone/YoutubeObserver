@@ -16,9 +16,14 @@ namespace YoutubeTelegramBot.Repositories.Implementations
         {
         }
 
-        public async Task<Channel> GetEntityAsync(string id)
+        public async Task<List<Channel>> GetChannelsAsync()
         {
-            return await DbSet.AsNoTracking().Include(h => h.Vidoes).FirstAsync(h => h.youtube_id == id);
+            return await DbSet.ToListAsync();
+        }
+
+        public async Task<Channel> GetChannelAsync(string id)
+        {
+            return await DbSet.AsNoTracking().Include(h => h.Videos).FirstAsync(h => h.youtube_id == id);
         }
     }
 }

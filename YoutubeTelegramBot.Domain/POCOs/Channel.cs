@@ -14,6 +14,6 @@ namespace YoutubeTelegramBot.Domain.POCOs
         public DateTime? last_check { get; set; }
 
         [InverseProperty("AuthorOfChannel")]
-        public List<Video> Vidoes { get; set; }
+        public List<Video> Videos { get; set; }
     }
 }

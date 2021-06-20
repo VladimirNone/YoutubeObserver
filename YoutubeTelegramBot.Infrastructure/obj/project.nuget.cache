@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "PEMnsi3L+KiJXLvXBg6m+/sEqcHQsBfNqDtTHAzl1Flw0hT8CB9oKYh8hvnSEOdwQvg1y2q+YCUIgDq+N0+hNw==",
+  "dgSpecHash": "NO8USFdklhjwiq8fuuHbqpUtLUB3r4bC0p9PqPdgALXqTJPbPneCaMtnXIsHxiCR+mPM5jI05RfKNvgxks5fKg==",
   "success": true,
   "projectFilePath": "D:\\Programs\\YoutubeTelegramBot\\YoutubeTelegramBot.Infrastructure\\YoutubeTelegramBot.Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -17,6 +17,8 @@
     "C:\\Users\\jilts_yz5r2u9\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\5.0.0\\microsoft.extensions.configuration.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\jilts_yz5r2u9\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\5.0.1\\microsoft.extensions.dependencyinjection.5.0.1.nupkg.sha512",
     "C:\\Users\\jilts_yz5r2u9\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\5.0.0\\microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\jilts_yz5r2u9\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\5.0.0\\microsoft.extensions.fileproviders.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\jilts_yz5r2u9\\.nuget\\packages\\microsoft.extensions.hosting.abstractions\\5.0.0\\microsoft.extensions.hosting.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\jilts_yz5r2u9\\.nuget\\packages\\microsoft.extensions.logging\\5.0.0\\microsoft.extensions.logging.5.0.0.nupkg.sha512",
     "C:\\Users\\jilts_yz5r2u9\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\5.0.0\\microsoft.extensions.logging.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\jilts_yz5r2u9\\.nuget\\packages\\microsoft.extensions.options\\5.0.0\\microsoft.extensions.options.5.0.0.nupkg.sha512",

@@ -26,12 +26,12 @@ namespace YoutubeTelegramBot.Infrastructure.Youtube.Implementations
 
         }
 
-        public List<Channel> SearchChannelsByName(string name, bool exactly)
+        public async Task<List<Channel>> SearchChannelsByNameAsync(string name, bool exactly)
         {
             var l = youtubeService.Search.List("snippet");
             l.Q = name;
             l.Type = "channel";
-            var res = l.Execute();
+            var res = await l.ExecuteAsync();
 
             if (exactly)
             {
@@ -49,17 +49,17 @@ namespace YoutubeTelegramBot.Infrastructure.Youtube.Implementations
             }
         }
 
-        public List<Video> SearchVideos(Channel channel, DateTime? publishedAfter)
+        public async Task<List<Video>> SearchVideosAsync(Channel channel)
         {
             var lVideos = youtubeService.Search.List("snippet");
             lVideos.ChannelId = channel.youtube_id;
             lVideos.Type = "video";
 
-            if(publishedAfter != null)
-                lVideos.PublishedAfter = publishedAfter;
+            if(channel.last_check != null)
+                lVideos.PublishedAfter = channel.last_check;
 
             lVideos.Order = SearchResource.ListRequest.OrderEnum.Date;
-            var res = lVideos.Execute();
+            var res = await lVideos.ExecuteAsync();
 
             var lVideo = youtubeService.Videos.List("snippet");
             var resultVideos = new List<Video>();
@@ -67,8 +67,8 @@ namespace YoutubeTelegramBot.Infrastructure.Youtube.Implementations
             foreach (var item in res.Items)
             {
                 lVideo.Id = item.Id.VideoId;
-                var video = lVideo.Execute().Items[0];
-                resultVideos.Add(new Video() { name = video.Snippet.Title, published = video.Snippet.PublishedAt.Value, url = "https://www.youtube.com/watch?v=" + video.Id, youtube_id = video.Id, channel_id = video.Snippet.ChannelId });
+                var video = (await lVideo.ExecuteAsync()).Items[0];
+                resultVideos.Add(new Video() { name = video.Snippet.Title, published = video.Snippet.PublishedAt.Value, url = IYoutubeService.StartPartOfVideoUrl + video.Id, youtube_id = video.Id, channel_id = video.Snippet.ChannelId });
             }
 
             return resultVideos;

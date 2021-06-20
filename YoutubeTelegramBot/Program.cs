@@ -17,7 +17,7 @@ namespace YoutubeTelegramBot
             {
                 CreateHostBuilder(args).Build().Run();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _ = ex;
             }
@@ -25,6 +25,11 @@ namespace YoutubeTelegramBot
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                /*                    .ConfigureLogging(logging =>
+                                    {
+                                        logging.ClearProviders();
+                                        logging.AddConsole();
+                                    })*/
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseShutdownTimeout(TimeSpan.FromSeconds(8));

@@ -14,6 +14,6 @@ namespace YoutubeTelegramBot.Repositories.Interfaces
 
         Task AddEntityAsync(T entity);
         void Update(T entity);
-        Task<T> GetEntityAsync(int id);
+        Task<T> GetEntityAsync(string id);
     }
 }

@@ -41,7 +41,7 @@ namespace YoutubeTelegramBot
 
             services.AddInfrastructure();
 
-            services.AddHostedService<CheckVideosPeriodManagerService>();
+            //services.AddHostedService<CheckVideosPeriodManagerService>();
 
             services.AddControllers().AddNewtonsoftJson(options => {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;

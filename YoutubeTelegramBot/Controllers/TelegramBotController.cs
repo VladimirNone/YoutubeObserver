@@ -25,15 +25,11 @@ namespace YoutubeTelegramBot.Controllers
             UnitOfWork = unitOfWork;
             BotService = botService;
             YoutubeService = youtubeService;
-
-
         }
 
         [Route("/check")]
         public async Task<IActionResult> Index()
         {
-
-
             return Ok("okey man");
         }
 

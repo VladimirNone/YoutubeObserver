@@ -14,6 +14,7 @@ namespace YoutubeTelegramBot.Domain.POCOs
         public string channel_id { get; set; }
         public string[] tags { get; set; }
         public string url { get; set; }
+        public bool watched { get; set; }
         public DateTime published { get; set; }
 
         [ForeignKey("channel_id")]

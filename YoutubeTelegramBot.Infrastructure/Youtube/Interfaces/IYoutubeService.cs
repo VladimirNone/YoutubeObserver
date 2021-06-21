@@ -9,7 +9,9 @@ namespace YoutubeTelegramBot.Infrastructure.Youtube.Interfaces
 {
     public interface IYoutubeService
     {
-        List<Channel> SearchChannelsByName(string name, bool exactly = true);
-        List<Video> SearchVideos(Channel channel, DateTime? publishedAfter);
+        public static string StartPartOfVideoUrl { get; } = "https://www.youtube.com/watch?v=";
+
+        Task<List<Channel>> SearchChannelsByNameAsync(string name, bool exactly = true);
+        Task<List<Video>> SearchVideosAsync(Channel channel);
     }
 }

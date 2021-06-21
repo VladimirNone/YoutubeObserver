@@ -15,6 +15,7 @@ using Newtonsoft.Json;
 using YoutubeTelegramBot.Infrastructure.Telegram.Interfaces;
 using YoutubeTelegramBot.Infrastructure.Youtube.Interfaces;
 using YoutubeTelegramBot.Repositories.Interfaces;
+using YoutubeTelegramBot.Infrastructure.BackgroundServices;
 
 namespace YoutubeTelegramBot
 {
@@ -36,15 +37,16 @@ namespace YoutubeTelegramBot
                 options.UseNpgsql(Configuration.GetConnectionString("YoutubeObserver"));
             });
 
+            services.AddLogging();
+
             services.AddInfrastructure();
-            
-            
+
+            services.AddHostedService<CheckVideosPeriodManagerService>();
+
             services.AddControllers().AddNewtonsoftJson(options => {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 options.SerializerSettings.Formatting = Formatting.Indented;
             });
-
-            //services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

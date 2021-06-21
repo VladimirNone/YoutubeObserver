@@ -31,7 +31,7 @@ namespace YoutubeTelegramBot.Repositories.Implementations
             DbSet.Update(entity);
         }
 
-        public virtual async Task<T> GetEntityAsync(int id)
+        public virtual async Task<T> GetEntityAsync(string id)
         {
             return await DbSet.FindAsync(id);
         }

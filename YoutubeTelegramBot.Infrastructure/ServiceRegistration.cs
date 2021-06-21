@@ -10,6 +10,7 @@ using YoutubeTelegramBot.Infrastructure.Telegram.Interfaces;
 using YoutubeTelegramBot.Infrastructure.Telegram.Implementations;
 using YoutubeTelegramBot.Infrastructure.Youtube.Interfaces;
 using YoutubeTelegramBot.Infrastructure.Youtube.Implementations;
+using YoutubeTelegramBot.Infrastructure.BackgroundServices;
 
 namespace YoutubeTelegramBot.Infrastructure
 {
@@ -19,7 +20,9 @@ namespace YoutubeTelegramBot.Infrastructure
         {
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddSingleton<IYoutubeService, YoutubeService>();
-            services.AddSingleton<IBotService, BotService>();
+            services.AddScoped<IBotService, BotService>();
+
+
         }
     }
 }

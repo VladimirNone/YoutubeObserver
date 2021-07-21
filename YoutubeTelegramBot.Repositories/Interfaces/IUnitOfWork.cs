@@ -11,6 +11,7 @@ namespace YoutubeTelegramBot.Repositories.Interfaces
 {
     public interface IUnitOfWork
     {
+        Guid guidId { get; set; }
         IVideosRepository VideosRepository { get; }
         IChannelsRepository ChannelsRepository { get; }
 

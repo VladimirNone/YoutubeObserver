@@ -10,6 +10,8 @@ namespace YoutubeTelegramBot.Repositories.Interfaces
     public interface IChannelsRepository : IRepository<Channel>
     {
         Task<List<Channel>> GetChannelsAsync();
-        Task<Channel> GetChannelAsync(string channelId);
+        Task<Channel> GetChannelByYoutubeIdAsync(string channelId);
+        Task<Channel> GetChannelByNameAsync(string name);
+        void MarkNewCheckChannel(Channel channel, List<Video> newVideosToAdd);
     }
 }

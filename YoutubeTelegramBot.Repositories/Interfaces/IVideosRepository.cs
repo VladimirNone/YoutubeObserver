@@ -9,6 +9,6 @@ namespace YoutubeTelegramBot.Repositories.Interfaces
 {
     public interface IVideosRepository : IRepository<Video>
     {
-
+        Task<List<Video>> GetVideosAsync(VideoStatus status);
     }
 }

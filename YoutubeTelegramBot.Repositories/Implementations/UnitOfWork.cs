@@ -11,6 +11,7 @@ namespace YoutubeTelegramBot.Repositories.Implementations
 {
     public class UnitOfWork : IUnitOfWork
     {
+        public Guid guidId { get; set; } = Guid.NewGuid();
         private IVideosRepository _videosRepository;
         private IChannelsRepository _channelsRepository;
         private YoutubeObserverDbContext context { get; }

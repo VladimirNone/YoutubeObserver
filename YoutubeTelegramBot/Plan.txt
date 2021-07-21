@@ -1,0 +1,19 @@
+﻿
+
+
+1) Сделать соответствие VideoStatus(enum) в проекте и video_status(enum) в postgres
+	https://entityframework.net/knowledge-base/34557574/how-to-create-a-table-corresponding-to-enum-in-ef6-code-first-
+
+2) Одна команда - несколько имен (необходимо для 3-го пункта)
+
+3) Убрать дублирующийся код в методе Execute в классах кнопок (отложить...)
+
+4) Сменить БД на MSSQL (для 5-го пункта)
+	//или заюзать https://www.elephantsql.com/docs/
+
+5) Опубликовать прогу 
+	https://somee.com/default.aspx
+
+
+
+

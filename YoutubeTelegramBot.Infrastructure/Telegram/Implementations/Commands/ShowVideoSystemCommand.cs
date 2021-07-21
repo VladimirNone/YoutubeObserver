@@ -29,6 +29,7 @@ namespace YoutubeTelegramBot.Infrastructure.Telegram.Implementations.Commands
 
             var keyboard = new InlineKeyboardMarkup(new[] {
                         InlineKeyboardButton.WithCallbackData("Просмотрено", "/wasWatched"),
+                        InlineKeyboardButton.WithCallbackData("Отложить", "/defer"),
                         InlineKeyboardButton.WithCallbackData("Не интересно", "/notInterested") });
 
             foreach (var video in showVideos)

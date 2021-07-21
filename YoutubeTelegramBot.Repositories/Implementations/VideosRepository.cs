@@ -16,5 +16,9 @@ namespace YoutubeTelegramBot.Repositories.Implementations
         {
         }
 
+        public async Task<List<Video>> GetVideosAsync(VideoStatus status)
+        {
+            return await DbSet.AsNoTracking().Where(h => h.status == status).ToListAsync();
+        }
     }
 }

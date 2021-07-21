@@ -12,13 +12,13 @@ using YoutubeTelegramBot.Repositories.Interfaces;
 
 namespace YoutubeTelegramBot.Infrastructure.Telegram.Implementations.Commands
 {
-    public class VideoNotInterestedCallbackCommand : Command
+    public class VideoDeferCallbackCommand : Command
     {
         private readonly ILogger Logger;
 
-        public override string Name => "/notInterested";
+        public override string Name => "/defer";
 
-        public VideoNotInterestedCallbackCommand(IBotService botService, IYoutubeService youtubeService, IUnitOfWork unitOfWork, ILogger logger)
+        public VideoDeferCallbackCommand(IBotService botService, IYoutubeService youtubeService, IUnitOfWork unitOfWork, ILogger logger)
             : base(botService, youtubeService, unitOfWork)
         {
             Logger = logger;
@@ -33,7 +33,7 @@ namespace YoutubeTelegramBot.Infrastructure.Telegram.Implementations.Commands
             var video = await unitOfWork.VideosRepository.GetEntityAsync(videoId);
             if (video != null)
             {
-                video.status = VideoStatus.NotInterested;
+                video.status = VideoStatus.Deferred;
 
                 await unitOfWork.Commit();
             }

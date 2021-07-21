@@ -35,17 +35,15 @@ namespace YoutubeTelegramBot.Infrastructure.BackgroundServices
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            using var scope = ScopeFactory.CreateScope();
-
-            UnitOfWork = scope.ServiceProvider.GetRequiredService<IUnitOfWork>();
-            BotService = scope.ServiceProvider.GetRequiredService<IBotService>();
-
             Logger.LogInformation("CheckVideosPeriodManagerService is starting");
-
-            var command = new ShowVideoSystemCommand(BotService);
 
             while (!stoppingToken.IsCancellationRequested)
             {
+                using var scope = ScopeFactory.CreateScope();
+
+                BotService = scope.ServiceProvider.GetRequiredService<IBotService>();
+                UnitOfWork = scope.ServiceProvider.GetRequiredService<IUnitOfWork>();
+
                 var channels = await UnitOfWork.ChannelsRepository.GetChannelsAsync();
 
                 try
@@ -53,23 +51,22 @@ namespace YoutubeTelegramBot.Infrastructure.BackgroundServices
                     foreach (var channel in channels)
                     {
                         var newVideos = await YoutubeService.SearchVideosAsync(channel);
-                        channel.Videos = newVideos;
-                        channel.last_check = DateTime.Now;
+                        UnitOfWork.ChannelsRepository.MarkNewCheckChannel(channel, newVideos);
                     }
 
                     await UnitOfWork.Commit();
 
                     foreach (var channel in channels)
                     {
-                        command.showVideos = channel.Videos;
-                        await command.ExecuteAsync(null);
+                        await BotService.ShowVideos(channel.Videos);
                     }
                 }
                 catch (Exception ex)
                 {
                     Logger.LogError(ex.Message);
-                    await UnitOfWork.Rollback();
                 }
+
+                await UnitOfWork.Rollback();
 
                 var checkUpdateTime = Configuration.GetSection("CheckUpdateNewVideosTime");
                 await Task.Delay(new TimeSpan(int.Parse(checkUpdateTime["Hours"]), int.Parse(checkUpdateTime["Minutes"]), 0));

@@ -59,19 +59,33 @@ namespace YoutubeTelegramBot.Infrastructure.Youtube.Implementations
                 lVideos.PublishedAfter = channel.last_check;
 
             lVideos.Order = SearchResource.ListRequest.OrderEnum.Date;
-            var res = await lVideos.ExecuteAsync();
+            var channelVideos = await lVideos.ExecuteAsync();
 
             var lVideo = youtubeService.Videos.List("snippet");
             var resultVideos = new List<Video>();
 
-            foreach (var item in res.Items)
+            foreach (var item in channelVideos.Items)
             {
                 lVideo.Id = item.Id.VideoId;
-                var video = (await lVideo.ExecuteAsync()).Items[0];
-                resultVideos.Add(new Video() { name = video.Snippet.Title, published = video.Snippet.PublishedAt.Value, url = IYoutubeService.StartPartOfVideoUrl + video.Id, youtube_id = video.Id, channel_id = video.Snippet.ChannelId });
+                var youtubeVideo = (await lVideo.ExecuteAsync()).Items[0];
+                resultVideos.Add(new Video() { name = youtubeVideo.Snippet.Title, published = youtubeVideo.Snippet.PublishedAt.Value, url = IYoutubeService.StartPartOfVideoUrl + youtubeVideo.Id, youtube_id = youtubeVideo.Id, channel_id = youtubeVideo.Snippet.ChannelId });
             }
 
             return resultVideos;
+        }
+
+        public async Task<Video> SearchVideoAsync(string videoYoutubeId)
+        {
+            var lVideos = youtubeService.Videos.List("snippet");
+            lVideos.Id = videoYoutubeId;
+            lVideos.MaxResults = 1;
+
+            var youtubeVideo = (await lVideos.ExecuteAsync()).Items[0];
+
+            if(youtubeVideo != null)
+                return new Video() { name = youtubeVideo.Snippet.Title, published = youtubeVideo.Snippet.PublishedAt.Value, url = IYoutubeService.StartPartOfVideoUrl + youtubeVideo.Id, youtube_id = youtubeVideo.Id, channel_id = youtubeVideo.Snippet.ChannelId };
+
+            return null;
         }
     }
 }

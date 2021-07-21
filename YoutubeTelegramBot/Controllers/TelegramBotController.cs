@@ -28,7 +28,7 @@ namespace YoutubeTelegramBot.Controllers
         }
 
         [Route("/check")]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             return Ok("okey man");
         }

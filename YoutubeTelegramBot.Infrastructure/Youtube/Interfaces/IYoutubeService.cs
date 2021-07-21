@@ -13,5 +13,6 @@ namespace YoutubeTelegramBot.Infrastructure.Youtube.Interfaces
 
         Task<List<Channel>> SearchChannelsByNameAsync(string name, bool exactly = true);
         Task<List<Video>> SearchVideosAsync(Channel channel);
+        Task<Video> SearchVideoAsync(string videoYoutubeId);
     }
 }

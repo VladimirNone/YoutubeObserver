@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Telegram.Bot.Types;
+using YoutubeTelegramBot.Domain.POCOs;
 using YoutubeTelegramBot.Infrastructure.Telegram.Interfaces;
 using YoutubeTelegramBot.Infrastructure.Youtube.Interfaces;
 using YoutubeTelegramBot.Repositories.Interfaces;
@@ -32,7 +33,7 @@ namespace YoutubeTelegramBot.Infrastructure.Telegram.Implementations.Commands
             var video = await unitOfWork.VideosRepository.GetEntityAsync(videoId);
             if (video != null)
             {
-                video.watched = true;
+                video.status = VideoStatus.Watched;
 
                 await unitOfWork.Commit();
             }

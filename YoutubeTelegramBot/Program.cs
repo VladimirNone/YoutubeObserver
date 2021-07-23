@@ -28,6 +28,7 @@ namespace YoutubeTelegramBot
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    webBuilder.UseUrls("https://0.0.0.0:8443/");
                 });
     }
 }

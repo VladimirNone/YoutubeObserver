@@ -20,5 +20,10 @@ namespace YoutubeTelegramBot.Repositories.Implementations
         {
             return await DbSet.AsNoTracking().Where(h => h.status == status).ToListAsync();
         }
+
+        public async Task<bool> VideoTracked(string videoId)
+        {
+            return await DbSet.AsNoTracking().AnyAsync(h => h.youtube_id == videoId);
+        }
     }
 }

@@ -30,6 +30,13 @@ namespace YoutubeTelegramBot.Infrastructure.Telegram.Implementations.Commands
             }
 
             var channel = (await youtubeService.SearchChannelsByNameAsync(inputedData))[0];
+
+            if(await unitOfWork.ChannelsRepository.ChannelTracked(channel.youtube_id))
+            {
+                await botService.Client.SendTextMessageAsync(message.Chat.Id, $"Channel with name '{channel.name}' has already been added");
+                return;
+            }
+
             await unitOfWork.ChannelsRepository.AddEntityAsync(channel);
             await unitOfWork.Commit();
             await botService.Client.SendTextMessageAsync(message.Chat.Id, $"Channel with name '{channel.name}' was added");

@@ -49,5 +49,10 @@ namespace YoutubeTelegramBot.Repositories.Implementations
 
             channel.last_check = DateTime.Now;
         }
+
+        public async Task<bool> ChannelTracked(string channelId)
+        {
+            return await DbSet.AsNoTracking().AnyAsync(h=>h.youtube_id == channelId);
+        }
     }
 }

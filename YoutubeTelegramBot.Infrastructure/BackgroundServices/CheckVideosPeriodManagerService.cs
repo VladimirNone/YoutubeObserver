@@ -51,6 +51,15 @@ namespace YoutubeTelegramBot.Infrastructure.BackgroundServices
                     foreach (var channel in channels)
                     {
                         var newVideos = await YoutubeService.SearchVideosAsync(channel);
+
+                        for (int i = 0; i < newVideos.Count; i++)
+                        {
+                            if (await UnitOfWork.VideosRepository.VideoTracked(newVideos[i].youtube_id))
+                            {
+                                newVideos.Remove(newVideos[i]);
+                            }
+                        }
+
                         UnitOfWork.ChannelsRepository.MarkNewCheckChannel(channel, newVideos);
                     }
 

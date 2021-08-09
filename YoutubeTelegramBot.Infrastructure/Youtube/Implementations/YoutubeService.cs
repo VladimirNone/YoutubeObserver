@@ -35,7 +35,7 @@ namespace YoutubeTelegramBot.Infrastructure.Youtube.Implementations
 
             if (exactly)
             {
-                var resultChannel = res.Items.FirstOrDefault(h => h.Snippet.ChannelTitle == name);
+                var resultChannel = res.Items.FirstOrDefault();
                 return new List<Channel>() { new Channel() { name = resultChannel.Snippet.ChannelTitle, youtube_id = resultChannel.Snippet.ChannelId } };
             }
             else

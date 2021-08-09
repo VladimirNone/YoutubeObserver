@@ -38,6 +38,12 @@ namespace YoutubeTelegramBot.Infrastructure.Telegram.Implementations.Commands
             try
             {
                 var video = await youtubeService.SearchVideoAsync(youtubeVideoId);
+                if (await unitOfWork.VideosRepository.VideoTracked(video.youtube_id))
+                {
+                    await botService.Client.SendTextMessageAsync(message.Chat.Id, $"Video with name '{video.name}' has already been added");
+                    return;
+                }
+
                 await unitOfWork.VideosRepository.AddEntityAsync(video);
                 await unitOfWork.Commit();
 

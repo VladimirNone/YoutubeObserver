@@ -18,6 +18,8 @@ namespace YoutubeTelegramBot.Infrastructure.Telegram.Implementations.Commands
 
         public override string Name => "/wasWatched";
 
+        public override string Description => "Колбэк для кнопки \"Просмотрено\"";
+
         public VideoWatchedCallbackCommand(IBotService botService, IYoutubeService youtubeService, IUnitOfWork unitOfWork, ILogger logger)
             : base(botService, youtubeService, unitOfWork)
         {

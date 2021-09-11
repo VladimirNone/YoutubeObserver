@@ -78,7 +78,11 @@ namespace YoutubeTelegramBot.Infrastructure.BackgroundServices
                 await UnitOfWork.Rollback();
 
                 var checkUpdateTime = Configuration.GetSection("CheckUpdateNewVideosTime");
-                await Task.Delay(new TimeSpan(int.Parse(checkUpdateTime["Hours"]), int.Parse(checkUpdateTime["Minutes"]), 0));
+                var period = new TimeSpan(int.Parse(checkUpdateTime["Hours"]), int.Parse(checkUpdateTime["Minutes"]), 0);
+
+                Logger.LogInformation((DateTime.Now + period).ToString());
+
+                await Task.Delay(period);
             }
 
             Logger.LogInformation("CheckVideosPeriodManagerService is stopping");

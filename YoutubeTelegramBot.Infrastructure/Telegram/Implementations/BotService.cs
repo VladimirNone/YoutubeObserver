@@ -13,7 +13,7 @@ namespace YoutubeTelegramBot.Infrastructure.Telegram.Implementations
 {
     public class BotService : IBotService
     {
-        private List<Command> commands { get; set; } = new List<Command>();
+        public List<Command> Commands { get; private set; } = new List<Command>();
 
         public TelegramBotClient Client { get; }
 
@@ -21,21 +21,22 @@ namespace YoutubeTelegramBot.Infrastructure.Telegram.Implementations
         {
             Client = new TelegramBotClient(configuration["TelegramBotToken"]);
 
-            commands.Add(new HelloCommand(this, youtubeService, unitOfWork));
-            commands.Add(new AddChannelCommand(this, youtubeService, unitOfWork));
-            commands.Add(new AddVideoCommand(this, youtubeService, unitOfWork, logger));
-            commands.Add(new CheckVideosByChannelCommand(this, youtubeService, unitOfWork));
-            commands.Add(new ShowChannelsCommand(this, youtubeService, unitOfWork));
-            commands.Add(new ShowDeferredVideosCommand(this, youtubeService, unitOfWork));
-            commands.Add(new VideoWatchedCallbackCommand(this, youtubeService, unitOfWork, logger));
-            commands.Add(new VideoDeferCallbackCommand(this, youtubeService, unitOfWork, logger));
-            commands.Add(new VideoNotInterestedCallbackCommand(this, youtubeService, unitOfWork, logger));
+            Commands.Add(new HelloCommand(this, youtubeService, unitOfWork));
+            Commands.Add(new AddChannelCommand(this, youtubeService, unitOfWork));
+            Commands.Add(new AddVideoCommand(this, youtubeService, unitOfWork, logger));
+            Commands.Add(new CheckVideosByChannelCommand(this, youtubeService, unitOfWork));
+            Commands.Add(new ShowCommandsCommand(this, youtubeService, unitOfWork));
+            Commands.Add(new ShowChannelsCommand(this, youtubeService, unitOfWork));
+            Commands.Add(new ShowDeferredVideosCommand(this, youtubeService, unitOfWork));
+            Commands.Add(new VideoWatchedCallbackCommand(this, youtubeService, unitOfWork, logger));
+            Commands.Add(new VideoDeferCallbackCommand(this, youtubeService, unitOfWork, logger));
+            Commands.Add(new VideoNotInterestedCallbackCommand(this, youtubeService, unitOfWork, logger));
 
         }
 
         public Command GetCommand(string name)
         {
-            return commands.Find(h => h.Name == name);
+            return Commands.Find(h => h.Name == name);
         }
 
         public async Task ShowVideos(List<Video> videos)

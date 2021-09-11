@@ -14,6 +14,8 @@ namespace YoutubeTelegramBot.Infrastructure.Telegram.Implementations.Commands
     {
         public override string Name => "/checkChannel";
 
+        public override string Description => "Делает внеплановую проверку контента канала";
+
         public CheckVideosByChannelCommand(IBotService botService, IYoutubeService youtubeService, IUnitOfWork unitOfWork)
             : base(botService, youtubeService, unitOfWork)
         {
@@ -30,6 +32,12 @@ namespace YoutubeTelegramBot.Infrastructure.Telegram.Implementations.Commands
             }
 
             var channel = await unitOfWork.ChannelsRepository.GetChannelByNameAsync(inputedData);
+
+            if(channel == null)
+            {
+                await botService.Client.SendTextMessageAsync(message.Chat.Id, $"Wrong name of channel");
+                return;
+            }
 
             var newVideos = await youtubeService.SearchVideosAsync(channel);
             unitOfWork.ChannelsRepository.MarkNewCheckChannel(channel, newVideos);

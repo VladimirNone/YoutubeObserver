@@ -18,6 +18,8 @@ namespace YoutubeTelegramBot.Infrastructure.Telegram.Implementations.Commands
 
         public override string Name => "/notInterested";
 
+        public override string Description => "Колбэк для кнопки \"Не интересно\"";
+
         public VideoNotInterestedCallbackCommand(IBotService botService, IYoutubeService youtubeService, IUnitOfWork unitOfWork, ILogger logger)
             : base(botService, youtubeService, unitOfWork)
         {

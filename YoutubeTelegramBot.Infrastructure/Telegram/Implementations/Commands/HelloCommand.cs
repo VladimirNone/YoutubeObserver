@@ -14,6 +14,8 @@ namespace YoutubeTelegramBot.Infrastructure.Telegram.Implementations.Commands
     {
         public override string Name => "/hello";
 
+        public override string Description => "Отвечает приветствием";
+
         public HelloCommand(IBotService botService, IYoutubeService youtubeService, IUnitOfWork unitOfWork)
             :base(botService, youtubeService, unitOfWork)
         { 
@@ -23,7 +25,7 @@ namespace YoutubeTelegramBot.Infrastructure.Telegram.Implementations.Commands
         {
             var message = update.Message;
 
-            await botService.Client.SendTextMessageAsync(message.Chat.Id, "hello bro");
+            await botService.Client.SendTextMessageAsync(message.Chat.Id, "hello");
         }
     }
 }

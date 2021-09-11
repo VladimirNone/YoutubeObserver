@@ -15,6 +15,8 @@ namespace YoutubeTelegramBot.Infrastructure.Telegram.Implementations.Commands
     {
         public override string Name => "";
 
+        public override string Description => "Выводит видео с закрепленными кнопками";
+
         public List<Video> showVideos { get; set; }
 
         public ShowVideoSystemCommand(IBotService botService)

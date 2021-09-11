@@ -14,6 +14,8 @@ namespace YoutubeTelegramBot.Infrastructure.Telegram.Implementations.Commands
     {
         public override string Name => "/addChannel";
 
+        public override string Description => "Добавляет канал по имени в список отслеживаемых";
+
         public AddChannelCommand(IBotService botService, IYoutubeService youtubeService, IUnitOfWork unitOfWork)
             : base(botService, youtubeService, unitOfWork)
         {

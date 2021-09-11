@@ -23,12 +23,12 @@ namespace YoutubeTelegramBot.Repositories.Implementations
 
         public async Task<Channel> GetChannelByYoutubeIdAsync(string id)
         {
-            return await DbSet.AsNoTracking().Include(h => h.Videos).FirstAsync(h => h.youtube_id == id);
+            return await DbSet.AsNoTracking().Include(h => h.Videos).FirstOrDefaultAsync(h => h.youtube_id == id);
         }
 
         public async Task<Channel> GetChannelByNameAsync(string name)
         {
-            return await DbSet.FirstAsync(h => h.name == name);
+            return await DbSet.FirstOrDefaultAsync(h => h.name == name);
         }
 
         /// <summary>

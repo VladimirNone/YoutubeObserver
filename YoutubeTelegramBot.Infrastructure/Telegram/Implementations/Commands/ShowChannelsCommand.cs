@@ -14,6 +14,8 @@ namespace YoutubeTelegramBot.Infrastructure.Telegram.Implementations.Commands
     {
         public override string Name => "/showChannels";
 
+        public override string Description => "Выводит список отслеживаемых каналов";
+
         public ShowChannelsCommand(IBotService botService, IYoutubeService youtubeService, IUnitOfWork unitOfWork)
             : base(botService, youtubeService, unitOfWork)
         {

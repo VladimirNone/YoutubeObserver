@@ -1,0 +1,491 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 13.4
+-- Dumped by pg_dump version 13.3
+
+-- Started on 2021-09-11 23:32:59
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 632 (class 1247 OID 76738)
+-- Name: video_status; Type: TYPE; Schema: public; Owner: postgres
+--
+
+CREATE TYPE public.video_status AS ENUM (
+    'Watched',
+    'Deferred',
+    'NotInterested',
+    'None'
+);
+
+
+ALTER TYPE public.video_status OWNER TO postgres;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 200 (class 1259 OID 76697)
+-- Name: channels; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.channels (
+    youtube_id text NOT NULL,
+    name text NOT NULL,
+    priority smallint DEFAULT 1 NOT NULL,
+    last_check timestamp without time zone
+);
+
+
+ALTER TABLE public.channels OWNER TO postgres;
+
+--
+-- TOC entry 201 (class 1259 OID 76706)
+-- Name: videos; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.videos (
+    youtube_id text NOT NULL,
+    name text NOT NULL,
+    channel_id text,
+    tags text[],
+    url text NOT NULL,
+    published timestamp without time zone,
+    statusdeferred public.video_status DEFAULT 'None'::public.video_status NOT NULL,
+    status text DEFAULT 'None'::text NOT NULL
+);
+
+
+ALTER TABLE public.videos OWNER TO postgres;
+
+--
+-- TOC entry 2995 (class 0 OID 76697)
+-- Dependencies: 200
+-- Data for Name: channels; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.channels (youtube_id, name, priority, last_check) FROM stdin;
+UC7TkMpfCCRwhi8vbTCAOw-A	Quantum Games	1	2021-09-11 22:51:33.924299
+UCa2oFpjziUQIImcpkrflwDw	SodaEffect	1	2021-09-11 22:51:34.188517
+UCdKuE7a2QZeHPhDntXVZ91w	Kuplinov ► Play	1	2021-09-11 22:51:34.471548
+UCfFkXO1Tfk6Je9O5h-dvLoA	Dizoff	1	2021-09-11 22:51:34.782545
+UCiFPh9V3Tkhqj6pvk2oK_sg	DeaDem	1	2021-09-11 22:51:35.088052
+UCLizDDpxiFRoqTLlMyGX7lQ	Joe Speen	1	2021-09-11 22:51:35.404242
+\.
+
+
+--
+-- TOC entry 2996 (class 0 OID 76706)
+-- Dependencies: 201
+-- Data for Name: videos; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.videos (youtube_id, name, channel_id, tags, url, published, statusdeferred, status) FROM stdin;
+lCrGQ0MGM8s	КАК МОГЛО ВЫПАСТЬ ЭТО??? БИТВА РАНДОМА В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=lCrGQ0MGM8s	2021-07-31 21:17:36	None	Watched
+1b5I907c980	🔴 СМОТРИМ ПОСЛЕДНИЕ ОБНОВЛЕНИЯ НА GTA-GO RP.	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=1b5I907c980	2021-06-20 16:08:29	None	None
+h4dHZmCreWQ	НОВАЯ ОБНОВА С ЛОВУШКАМИ НА ВЫЖИВАНИЕ ОНЛАЙН - Wreckfest	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=h4dHZmCreWQ	2021-07-22 20:14:24	None	None
+M4UA78VGWok	🔴СУББОТНИЙ СТРИМ ПО RUST. ПЫТАЕМСЯ ВЫЖИТЬ.	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=M4UA78VGWok	2021-06-20 07:31:55	None	None
+okqmf8EMNtg	УСТРОИЛИ ДЕРБИ ПРЯМО В ГРЯЗИ! Wreckfest	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=okqmf8EMNtg	2021-06-18 15:27:45	None	None
+5GQDoBjKk5A	НОВЫЙ РЕЖИМ: 1 ПРОТИВ ВСЕХ. ВОЛНА ЗАРАЖЕНИЙ В ГТА 5 ОНЛАЙН.	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=5GQDoBjKk5A	2021-06-17 14:04:59	None	None
+te9eqsXZqls	МНЕ НАДО ВЫБРАТЬСЯ ИЗ ЭТОЙ ГРОБНИЦЫ ЛЮБОЙ  ЦЕНОЙ! ИЗБЕГАЕМ ЛОВУШЕК В PHANTOM ABYSS	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=te9eqsXZqls	2021-07-22 14:05:53	None	None
+QhgGIN9q19U	НОВОЕ МЯСО В БИТВЕ АВТОСБОРОК!!! CROSSOUT!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=QhgGIN9q19U	2021-07-22 22:40:43	None	Watched
+q9pxx_9RuvA	УГАРНОЕ ОГРАБЛЕНИЕ ТЮРЬМЫ В GTA ONLINE!!! (УГАР, ЭПИК, БАГИ) #3	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=q9pxx_9RuvA	2021-07-22 13:54:39	None	NotInterested
+GXhWiR-XvGw	НЕ СМОГ ПОЙМАТЬ ЯЙЦО :D УГАРНЫЕ ПРЯТКИ В WITCH IT!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=GXhWiR-XvGw	2021-07-31 12:26:11	None	Watched
+lgxzfMp7QBM	ОТПЛЫВАЕМ НА ПОИСКИ ЧЕРНОЙ ЖЕМЧУЖИНЫ! НАЧАЛО ПОДВОДНОЙ ОДИССЕИ.МОРСКИЕ ПРИКЛЮЧЕНИЯ В SEA OF THIEVES.	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=lgxzfMp7QBM	2021-07-23 11:15:03	None	NotInterested
+8_EeNO14CQY	НЕ ПОКАЗЫВАЙТЕ ЭТОТ РОЛИК ПОЧТЕ РОССИИ! МЫ С ПАШЕЙ УСТРОИЛИСЬ В СЛУЖБУ ДОСТАВКИ.. (T.R.D.S)	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=8_EeNO14CQY	2021-07-22 18:04:58	None	Watched
+blP_IszV7fU	ОБМАНУЛ ГЛУПОГО МАНЬЯКА И ПОКАЗАЛ СВОЁ ПРЕВОСХОДСТВО! (УГАРНЫЕ ПРЯТКИ В CS GO)	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=blP_IszV7fU	2021-06-15 13:45:03	None	None
+JKwHq5mVY9A	ЛИЦОМ К ЛИЦУ ПРОТИВ КРАКЕНА! ДОЛГОЕ И ПОТНОЕ СРАЖЕНИЕ. МОРСКИЕ ПРИКЛЮЧЕНИЯ В SEA OF THIEVES.	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=JKwHq5mVY9A	2021-07-29 12:30:05	None	NotInterested
+0Mu5oP0uYCk	ИДЕМ ВСЕМ КЛАНОМ НА ПОСЛЕДНЕГО БОССА! ФИНАЛ И ПОЕЗДКА НА КРАЙ ЗЕМЛИ В VALHEIM	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=0Mu5oP0uYCk	2021-06-20 16:16:16	None	None
+YY9Yhw-ES3A	И СНОВА ФИЗИКИ НЕТ, НО ВЫ ДЕРЖИТЕСЬ)) ПРОХОДИМ КРУТОЙ СКИЛЛ ТЕСТ ВСЕЙ БАНДОЙ В ГТА 5 ОНЛАЙН	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=YY9Yhw-ES3A	2021-06-19 18:48:27	None	None
+UT3Q5iT0aYU	ТАК МОГУ ТОЛЬКО Я! ПОПАЛСЯ НА МАКСИМАЛЬНО ГЛУПОМ НАРУШЕНИИ В ГТА 5 РП (ECLIPSE GTA 5 RP)	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=UT3Q5iT0aYU	2021-06-18 17:03:16	None	None
+YvQKauGmdCQ	УЗКАЯ СТЕНКА НА СТЕНКУ С ПРЕПЯТСТВИЯМИ (ГТА 5 ОНЛАЙН, GTA ONLINE)	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=YvQKauGmdCQ	2021-07-31 19:10:06	None	NotInterested
+7TuYFQ0qPWs	ЭТО 100% ПОБЕДА!!! РУССКИЕ ДОРОГИ В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=7TuYFQ0qPWs	2021-08-02 17:14:56	None	Watched
+6wpo2-7muYI	ЁЖИК-ПОХМЕЛЁЖИК ► Creepy Tale 2 #5	UCdKuE7a2QZeHPhDntXVZ91w	\N	https://www.youtube.com/watch?v=6wpo2-7muYI	2021-08-07 18:00:09	None	Watched
+lWZpOOIAz8o	КУПЛИНОВ СНОВА ИДЁТ В Genshin Impact ► СТРИМ #2	UCdKuE7a2QZeHPhDntXVZ91w	\N	https://www.youtube.com/watch?v=lWZpOOIAz8o	2021-08-05 21:49:26	None	NotInterested
+dNPNyJIhPQ0	НЕЧИСТАЯ РЕКА ► Creepy Tale 2 #4	UCdKuE7a2QZeHPhDntXVZ91w	\N	https://www.youtube.com/watch?v=dNPNyJIhPQ0	2021-08-04 15:00:30	None	Watched
+PbbDV-xkE-0	НАКОРМИЛ БАБУЛЮ ► Creepy Tale 2 #3	UCdKuE7a2QZeHPhDntXVZ91w	\N	https://www.youtube.com/watch?v=PbbDV-xkE-0	2021-08-02 18:00:09	None	Watched
+UjAB6_dSSTs	ФИНАЛ ► Creepy Tale 2 #6	UCdKuE7a2QZeHPhDntXVZ91w	\N	https://www.youtube.com/watch?v=UjAB6_dSSTs	2021-08-08 18:00:11	None	Watched
+twXBFBgzY28	ОЧЕНЬ ЛАКЕРСКИЙ СПУСК (ГТА 5 ОНЛАЙН, GTA ONLINE)	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=twXBFBgzY28	2021-08-11 21:01:37	None	None
+WG1bGkS1EcE	МЫ ВЫПЛЫЛИ ЗА КРАЙ ЗЕМЛИ, РАДИ ЭТОГО СРАЖЕНИЯ! МОРСКИЕ ПРИКЛЮЧЕНИЯ В SEA OF THIEVES.	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=WG1bGkS1EcE	2021-08-11 14:36:30	None	NotInterested
+Y0cC1K0Y5Qk	100% ПБЕДА?! БИТВА РАНДОМА В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=Y0cC1K0Y5Qk	2021-08-11 20:59:21	None	NotInterested
+ibKanQ_ruUY	ИДЕАЛЬНОЕ ЗЛО!!!  УГАР В GANG BEASTS!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=ibKanQ_ruUY	2021-08-11 18:30:19	None	Watched
+0QrdtvjIQAI	ЛУЧШАЯ ЕДА, ЛУЧШАЯ БРОНЯ И БОЕВОЙ НАСТРОЙ! ВСЕ ГОТОВО ДЛЯ БИТВЫ С ПОСЛЕДНИМ БОССОМ! VALHEIM	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=0QrdtvjIQAI	2021-06-16 16:25:01	None	None
+HpRxVU-sYOE	УПРАВЛЯТЬ МАШИНОЙ НЕВОЗМОЖНО! НЕКОНТРОЛИРУЕМЫЙ ЛЕДЯНОЙ СПУСК В ГТА 5 ОНЛАЙН	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=HpRxVU-sYOE	2021-06-15 14:00:07	None	None
+_eV0xjhDsI4	НЕРЕАЛЬНЫЙ РУССКИЙ СПУСК ИЗ GUITAR HERO! СЫГРАЙ КАК ПРО! (ГОНКИ ГТА 5 ОНЛАЙН)	UCa2oFpjziUQIImcpkrflwDw	\N	https://www.youtube.com/watch?v=_eV0xjhDsI4	2021-06-09 18:12:58	Watched	Watched
+p83b5QTkIPc	ВОЛНИТЕЛЬНЫЙ СПУСК (ГТА 5 ОНЛАЙН, GTA ONLINE)	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=p83b5QTkIPc	2021-06-18 11:27:46	None	None
+sKN7-8Rr_jU	ЛАМПОВАЯ СТЕНКА НА СТЕНКУ (ГТА 5 ОНЛАЙН, GTA ONLINE)	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=sKN7-8Rr_jU	2021-06-14 20:32:42	None	None
+Gzb4rtXbvgg	Я СНОВА ЭТО СПРЯТАЛ! И МЕНЯ НИКТО НЕ НАШЕЛ! ПРЯТКИ В PROP AND SEEK	UCa2oFpjziUQIImcpkrflwDw	\N	https://www.youtube.com/watch?v=Gzb4rtXbvgg	2021-06-12 15:51:28	Watched	Watched
+lfivRF_ZDPI	ПОСТРОЙ СЕБЕ СКИЛЛ ТЕСТ САМ! КООПЕРАТИВНЫЙ ПАРНЫЙ СКИЛЛ ТЕСТ! (ГОНКИ ГТА 5 ОНЛАЙН)	UCa2oFpjziUQIImcpkrflwDw	\N	https://www.youtube.com/watch?v=lfivRF_ZDPI	2021-06-14 19:17:08	Watched	Watched
+o1SiGA00bQM	ПОЗВАЛИ НЕНАСТОЯЩЕГО ДИЗАЙНЕРА НА СВОЙ КОРАБЛЬ, ЧТОБЫ СДЕЛАТЬ КРУТОЙ РЕМОНТ! РАФТ(RAFT)	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=o1SiGA00bQM	2021-07-21 15:30:28	None	None
+Vg2tcN_tOhw	ОН МЕНЯ НЕ НАШЕЛ! ХОТЯ ЭТО БЫЛО НЕВОЗМОЖНО СПРЯТАТЬ! PROP AND SEEK	UCa2oFpjziUQIImcpkrflwDw	\N	https://www.youtube.com/watch?v=Vg2tcN_tOhw	2021-07-23 15:08:54	None	Watched
+fTa_VN70DDM	НЕ, НУ Я КОНЕЧНО ПЫТАЛСЯ ЕГО НАЙТИ, НО НЕ ДУМАЛ, ЧТО ОН ТАМ! УГАРНЫЕ ПРЯТКИ В CS:GO	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=fTa_VN70DDM	2021-07-21 11:21:30	None	Watched
+P2P4x_LV_wc	САМЫЙ БЕСПАЛЕВНЫЙ ГЕЙМПЛЕЙ В PROP AND SEEK!	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=P2P4x_LV_wc	2021-06-19 15:53:54	Watched	Watched
+ZsbkhxVqXHk	ЭТО МОГЛО ДЛИТСЯ 6 ЧАСОВ ЕСЛИ БЫ НЕ МОЯ УДАЧА! (ГОНКИ ГТА 5 ОНЛАЙН)	UCa2oFpjziUQIImcpkrflwDw	\N	https://www.youtube.com/watch?v=ZsbkhxVqXHk	2021-06-11 15:23:45	NotInterested	NotInterested
+QbWUZRcvuo4	ЧТО БЫЛО ПОСЛЕ УРОКОВ - Bad Guys at School	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=QbWUZRcvuo4	2021-06-15 16:27:56	NotInterested	NotInterested
+NzU1wgNqw_8	ВСТРЕТИЛИ НЕЧТО (ГТА 5 РП, RADMIR RP, УГАР)	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=NzU1wgNqw_8	2021-06-16 19:20:35	NotInterested	NotInterested
+vDsEJhZ6j48	САМАЯ НЕРВНАЯ ДУЭЛЬ В CROSSOUT!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=vDsEJhZ6j48	2021-06-19 20:15:28	Watched	Watched
+cpbd3457I-g	УРАЛ vs ЛЕСЕНКА В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=cpbd3457I-g	2021-06-21 16:57:39	None	None
+bGVU6n6ExI0	КУПИЛИ СОДЕ КОНТЕЙНЕР С АВТО (ГТА 5 РП, RADMIR RP, УГАР)	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=bGVU6n6ExI0	2021-07-23 19:55:38	None	None
+Hj2BzrRCgeg	КАК ДАЛЕКО ЗАЕДЕТ ОГРОМНЫЙ ГРУЗОВИК??? ЛЕСТНИЦА В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=Hj2BzrRCgeg	2021-06-18 17:33:46	Watched	Watched
+UNG8Pd2cIvg	НЕ ВЫХОДИ, КОГДА ВИДИШЬ ЭТО!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=UNG8Pd2cIvg	2021-06-17 16:41:14	Watched	Watched
+8zuiKhfXiUo	ПЕРЕПРЫГНУТЬ ЧЕРЕЗ ЗАБОР!!! GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=8zuiKhfXiUo	2021-06-16 21:28:18	Watched	Watched
+FSPzMYhuO8g	ЗИМА БЛИЗКО! ЗИМА ПРИШЛА! ГОВОРИЛИ ОНИ, А ТЕПЕРЬ МЫ ЗАМЕРЗАЕМ! (СИМУЛЯТОР БОМЖА)	UCa2oFpjziUQIImcpkrflwDw	\N	https://www.youtube.com/watch?v=FSPzMYhuO8g	2021-07-29 15:28:04	None	Watched
+1xqG0K-E0x8	ЭТА ИГРА СТРАШНЕЕ ФАЗМАФОБИИ!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=1xqG0K-E0x8	2021-07-23 16:42:18	None	NotInterested
+r5EdXaRoL60	УПРАВЛЯТЬ МАШИНОЙ ПРОСТО НЕВОЗМОЖНО! СПУСК ПО ЛЕДЯНОЙ ДОРОГЕ В ДОЖДЬ! ГТА 5 ОНЛАЙН	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=r5EdXaRoL60	2021-07-31 16:09:36	None	Watched
+ySbk-E9qsRg	ВЕЗИ МЕНЯ АККУРАТНО! ЛУЧШАЯ ДОСТАВКА СОДЫ В ПАРНОМ СКИЛЛ ТЕСТЕ! (ГОНКИ ГТА 5 ОНЛАЙН)	UCa2oFpjziUQIImcpkrflwDw	\N	https://www.youtube.com/watch?v=ySbk-E9qsRg	2021-06-22 13:27:36	None	None
+YiPV7x9DYiQ	БЕЗУМНОЕ ОГРАБЛЕНИЕ БАНКОВ В GTA ONLINE! #2	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=YiPV7x9DYiQ	2021-07-21 16:48:56	None	NotInterested
+mfZhmzOmaso	САМАЯ НЕПРОХОДИМАЯ ЛАВОЧКА (ГТА 5 ОНЛАЙН, GTA ONLINE)	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=mfZhmzOmaso	2021-06-23 11:05:09	None	None
+cpxKcwU-HyQ	Я ГИГАНТСКОЕ ДЕРЕВО, НО МЕНЯ НИКТО НЕ НАШЕЛ! ПРЯТКИ В PROP AND SEEK.	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=cpxKcwU-HyQ	2021-06-23 11:30:03	None	None
+o3OXLPPxpyc	В РАФТ ЗАВЕЗЛИ ОБНОВЛЕНИЕ! ОТКРЫВАЕМ ТАИНСТВЕННУЮ ПОСЫЛКУ И МОДЕРНИЗИРУЕМ НАШ КОРАБЛЬ (RAFT)	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=o3OXLPPxpyc	2021-06-24 15:56:23	None	None
+yLIUXNMrPu8	ЦВЕТ НАСТРОЕНИЯ - ПЕТУШИНЫЙ :D ПЕТУШИНЫЕ ИСТОРИИ В ГТА 5 РП (ECLIPSE GTA 5 RP)	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=yLIUXNMrPu8	2021-07-24 14:16:55	None	None
+k8Ss_wOz7Mo	НЯШНЫЙ УБИЙЦА DIZOFF. БИТВА КОЛОБКОВ В Rounds	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=k8Ss_wOz7Mo	2021-06-21 15:55:51	Watched	Watched
+mwcYNMT9_Ys	НОВАЯ БИТВА РАНДОМА В WAR THUNDER!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=mwcYNMT9_Ys	2021-06-26 15:58:20	None	None
+NeX88U6TVgY	ОН ЗАПУСКАЕТ GTA 5 НА УЛЬТРА!!! ОБЗОР ИГРОВОГО HELIOS 300 НА NVIDIA RTX!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=NeX88U6TVgY	2021-06-21 21:49:39	NotInterested	NotInterested
+pE1krUpBPlg	ПОДСТАВА ГОДА!!! УГАР В GANG BEASTS!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=pE1krUpBPlg	2021-06-27 16:05:52	None	None
+usziJR8b7hM	ДА ЗДРАВСТВУЕТ НОВАЯ ЖИЗНЬ! НАЧАЛО НОВОЙ ИСТОРИИ НА RADMIR RP.	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=usziJR8b7hM	2021-07-26 13:15:02	None	None
+skLO7_5qOJs	ТАЙМИНГОВАЯ СТЕНКА НА СТЕНКУ (ГТА 5 ОНЛАЙН, GTA ONLINE)	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=skLO7_5qOJs	2021-07-26 20:09:52	None	None
+aZpH-ovrv1c	ОН ПРОСТО НЕ СМОГ ДО МЕНЯ ДОПРЫГНУТЬ! ТРОЛЛИНГ МАНЬЯКА ПАРКУРОМ! (УГАРНЫЙ МАНЬЯК В КС ГО)	UCa2oFpjziUQIImcpkrflwDw	\N	https://www.youtube.com/watch?v=aZpH-ovrv1c	2021-07-24 17:31:46	None	None
+s3Dbb0uT3DM	ТАКОГО НИКТО НЕ МОГ ОЖИДАТЬ!!! РУССКИЕ ДОРОГИ В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=s3Dbb0uT3DM	2021-07-25 18:40:38	None	None
+MSDucYAu6dA	ОБОЗВАЛИ И ПРОГНАЛИ!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=MSDucYAu6dA	2021-07-26 16:42:31	None	Watched
+jvQzbXqsnVs	ТАНК vs ЧЕЛОВЕК В ENLISTED!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=jvQzbXqsnVs	2021-07-26 15:03:59	None	Watched
+EElyBfPGBks	СТРОИМ ВЕРТОЛЕТ НА ПОРШНЯХ В SCRAP MECHANIC!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=EElyBfPGBks	2021-07-24 12:00:13	None	Watched
+keKRe8_KuUM	НЕОЖИДАННЫЙ СЮРПРИЗ!!! СТЕНКА НА СТЕНКУ В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=keKRe8_KuUM	2021-07-23 22:09:51	None	Watched
+NFSgx8UgTDs	УГАРНЫЕ ПРЯТКИ В PROP AND SEEK!	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=NFSgx8UgTDs	2021-07-25 19:54:04	None	Watched
+2soI3KrxIwI	ЕЩЕ ДВА ШИКАРНЫХ СПУСКА (ГТА 5 ОНЛАЙН, GTA ONLINE)	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=2soI3KrxIwI	2021-07-24 19:58:22	None	NotInterested
+qQ8AVEw_mZs	🔴 СОЛО ВЫЖИВАНИЕ В APEX.	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=qQ8AVEw_mZs	2021-07-24 19:04:55	None	NotInterested
+GKvU3Klazio	ПОЛУЧИЛАСЬ ПРОСТО БОМБА! НАКОНЕЦ-ТО МЫ ДОСТРОИЛИ КРУИЗНЫЙ ЛАЙНЕР В РАФТ(RAFT)	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=GKvU3Klazio	2021-07-26 14:58:57	None	Watched
+Ai3AE1iSK3E	ПРОЙЩАЙТЕ НЕРВЫ.. ЛЕДЯНОЙ СПУСК С НЕВИДИМЫМИ ВЕТРЯКАМИ И МИНАМИ В ГТА 5 ОНЛАЙН	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=Ai3AE1iSK3E	2021-07-25 14:49:35	None	Watched
+OCnWoNbllzk	ОБАЛДЕННЫЙ ПАРКУР НА ГУСЕНИЧНОМ ТАНКЕ С АРЕНЫ! СКИЛЛТЕСТ В ГТА 5 ОНЛАЙН	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=OCnWoNbllzk	2021-07-25 11:30:02	None	NotInterested
+OJjLq_U8Fx8	ЭТО БИТВА КОЛОБКОВ С МОДАМИ! БИТВА КРУГЛЯШЕЙ В Rounds	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=OJjLq_U8Fx8	2021-08-01 11:54:35	None	Watched
+7RoAT4QWkY0	ПОСТАВИЛ В МУСТАНГ АВТОПИЛОТ (ГТА 5 РП, RADMIR RP, УГАР)	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=7RoAT4QWkY0	2021-08-02 20:07:06	None	NotInterested
+BIpaCbcJpB4	ТАКОЙ БОЛИ НИКТО НЕ ОЖИДАЛ!!! GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=BIpaCbcJpB4	2021-07-29 17:08:39	None	Watched
+sJ5_58TUybs	ЛУЧШЕ БЫ ОНИ НЕ ДЕЛАЛИ ЭТОГО!!!  УГАР В GANG BEASTS!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=sJ5_58TUybs	2021-08-04 18:35:17	None	None
+mgNaQ8IF4ws	ИДЕАЛЬНЫЕ ПРЯТКИ В PROP AND SEEK!	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=mgNaQ8IF4ws	2021-07-21 17:37:29	None	None
+t-1ht5ZANcw	УТИНЫЕ ИСТОРИИ НЕ БУДУТ ПРЕЖНИМИ	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=t-1ht5ZANcw	2021-06-27 12:15:09	None	None
+XBDz4RYfxKo	НАКАЗАЛ ДРУГА!!! БИТВА РАНДОМА В WAR THUNDER!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=XBDz4RYfxKo	2021-07-21 20:57:46	None	Watched
+cWKtDmCAbr4	🔴 СТРИМ ПО RUST. С КАМНЕМ ПО ЖИЗНИ.	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=cWKtDmCAbr4	2021-06-27 16:38:12	None	None
+vm1jKecbTJo	ПО СЧАСТЛИВОЙ СЛУЧАЙНОСТИ МЫ НАШЛИ НОМЕР КАБАНА! БИТВА ЗА ОСОБНЯК В ГТА 5 РП (ECLIPSE GTA 5 RP)	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=vm1jKecbTJo	2021-07-29 17:58:03	None	None
+f7Hv6sHAjr0	МЕНЯ ПОХИТИЛ КИТ! А ВЕДЬ МЫ ПРОСТО ХОТЕЛИ ЧЕРЕПАШЬЕГО СУПА! ФИНАЛ РАФТА(RAFT)	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=f7Hv6sHAjr0	2021-08-04 14:58:52	None	Watched
+Udc9VN76vJ8	НОВОЕ ШОУ!!! УЗКО-НИЗКО В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=Udc9VN76vJ8	2021-06-26 21:10:22	Watched	Watched
+_zyJDzrBYeM	ДАЖЕ ЗДЕСЬ НАШЛИ ЕГО!!! УГАРНЫЕ ПРЯТКИ!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=_zyJDzrBYeM	2021-08-01 14:15:55	None	Watched
+ej9k7cEIq9s	ЗАЯЦ ВЫШЕЛ НА ОХОТУ (УГАР, МАНЬЯК В КС ГО)	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=ej9k7cEIq9s	2021-06-28 18:54:44	None	None
+9OQZd718aXM	САМЫЙ НЕЛЕПЫЙ ГЕЙМПЛЕЙ В PROP AND SEEK!	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=9OQZd718aXM	2021-08-01 13:23:52	None	Watched
+msFJ0w0qARQ	ПЫТАЕМСЯ ВЫЖИТЬ В ЗОМБИ АПОКАЛИПСИС! НОВЫЙ КООПЕРАТИВНЫЙ РЕЖИМ В WATCH DOGS LEGION ONLINE	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=msFJ0w0qARQ	2021-06-28 14:33:26	None	None
+tkH2K0DuU7o	CS:GO В VR!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=tkH2K0DuU7o	2021-08-02 20:31:27	None	None
+48F5hEK8nVU	СПЕЦ. ВЫПУСК!!! ШОУ ЛЕСТНИЦА В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=48F5hEK8nVU	2021-08-08 20:48:42	None	NotInterested
+9tgrlkp7gl4	ГИГАНТСКАЯ НЕБЕСНАЯ ВОРОНКА! ПОПРОБУЙ НЕ УЛЕТЕТЬ! ГТА 5 ОНЛАЙН	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=9tgrlkp7gl4	2021-06-26 19:48:12	Watched	Watched
+fkO8xVZ76Do	ОГРАБИЛИ ГРАБИТЕЛЕЙ :D ЛЕТНИЙ БЕСПРЕДЕЛ В ГТА 5 РП (ECLIPSE GTA 5 RP)	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=fkO8xVZ76Do	2021-06-27 15:16:44	Watched	Watched
+wzDMD6aMiWg	АДСКАЯ ВОЙНА ЗА ДЫРОЧКУ В GTA ONLINE!!! СТЕНКА НА СТЕНКУ!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=wzDMD6aMiWg	2021-06-29 13:26:40	None	None
+eFq4Ha8xwCY	Я ДОЛЖЕН ПОЙМАТЬ И "ОТШЛЁПАТЬ" ДИЗОФФА И СОДУ! СИМУЛЯТОР МУХИ! SLAP THE FLY	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=eFq4Ha8xwCY	2021-06-29 12:57:51	None	None
+W-SJJqQ_pzM	У НЕГО НЕТ НЕ ЕДИНОГО ШАНСА!!! СТЕНКА НА СТЕНКУ В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=W-SJJqQ_pzM	2021-06-27 20:52:00	Watched	Watched
+XceFm4uN4s4	НОВЫЙ ДЕД ЛАЙН!!! ВЫЖИВАНИЕ НА НЕОНОВЫХ БАЙКАХ В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=XceFm4uN4s4	2021-06-28 17:25:40	Watched	Watched
+k5NHAAYM7gI	ОНИ ЗАМИНИРОВАЛИ ПЛАНЕТУ. ТОЛЬКО МЫ МОЖЕМ СПАСТИ МИР! Operation: Tango	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=k5NHAAYM7gI	2021-08-07 14:00:15	None	NotInterested
+JoCunz3UYlo	ВЗРЫВНОЙ СПУСК ПО РУССКИМ ДОРОГАМ НА ПОЛНОЙ СКОРОСТИ В ГТА 5 ОНЛАЙН	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=JoCunz3UYlo	2021-08-07 14:00:06	None	Watched
+FzBkDMH8mbY	ДИМОН ПОЙМАЛ МЕТАЛЛИЧЕСКОГО КАБАНА И ЗАЖАРИЛ! БИТВА АВТОСБОРОК (CROSSOUT)	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=FzBkDMH8mbY	2021-07-17 13:40:09	None	None
+WQVHMAy1Eeo	МНЕ НЕКУДА БЕЖАТЬ! ОНИ МЕНЯ ВСЁ РАВНО НАСТИГНУТ! УГАРНЫЕ ПРЯТКИ В CS:GO	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=WQVHMAy1Eeo	2021-06-30 13:45:00	Watched	Watched
+CMPmgzmVbNg	КЛАССНЫЙ СПУСК С ПАСХАЛКАМИ (ГТА 5 ОНЛАЙН, GTA ONLINE)	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=CMPmgzmVbNg	2021-08-08 20:41:29	None	NotInterested
+wpxUllnJFAo	СПРЯТАЛСЯ КОРОБКОЙ НА МИРАЖЕ, И МЕНЯ НЕ НАШЛИ! УГАРНЫЕ ПРЯТКИ В CS:GO	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=wpxUllnJFAo	2021-08-09 16:01:54	None	None
+AVzI_a8TNgc	ПАРОЧКА МЯСНЫХ СТЕНКА НА СТЕНКУ (ГТА 5 ОНЛАЙН, GTA ONLINE)	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=AVzI_a8TNgc	2021-08-09 21:30:26	None	NotInterested
+Zcyk6GeyIT0	КУПЛИНОВ, ДАНГАР и КИБЕРСПОРТ в Enlisted ► КООП-СТРИМ #2	UCdKuE7a2QZeHPhDntXVZ91w	\N	https://www.youtube.com/watch?v=Zcyk6GeyIT0	2021-08-09 12:55:02	None	NotInterested
+2ojok83ObxU	ВОЛЛРАЙД С ПЕРЕКЛАДКОЙ + СИЕНКА НА СТЕНКУ В GTA ONLINE = 100% БОЛЬ!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=2ojok83ObxU	2021-08-10 20:05:30	None	Watched
+PR3xjXFykb0	ЛИБО МЫ ЭТО ДОСТАВИМ, ЛИБО ОНО НАС УБЬЕТ! ДОСТАВКА НА НОВОМ ТРАНСПОРТЕ (T.R.D.S)	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=PR3xjXFykb0	2021-08-11 17:56:11	None	Watched
+TnIAhlgwiK4	Максимум Удачи в CS:GO	\N	\N	https://www.youtube.com/watch?v=TnIAhlgwiK4	2021-08-28 15:01:55	None	Watched
+njSM7zlqwAA	САМЫЕ НЕВЕЗУЧИЕ ГОНКИ НА ВЫЖИВАНИЕ ОНЛАЙН - Wreckfest	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=njSM7zlqwAA	2021-07-29 21:28:16	None	NotInterested
+WE_FwyCGSEY	СКОЛЬЗКО, БОЛЬНО, НО ПРИКОЛЬНО! КУЧА ФЕЙЛОВ И КРУТОЙ КАМБЕК В ГТА 5 ОНЛАЙН	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=WE_FwyCGSEY	2021-06-30 15:38:17	Watched	Watched
+wW_lylp-uko	НОВОЕ ШОУ!!! УЗКО-НИЗКО В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=wW_lylp-uko	2021-07-01 17:10:03	None	None
+qfIBMPiOXm0	ВОТ ЭТО ЖИР! НОВЫЙ БЕНТЛИ НА ЭЛЕКТРОТЯГЕ ЗА 25 МИЛЛИОНОВ В ГТА 5 РП (ECLIPSE GTA 5 RP)	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=qfIBMPiOXm0	2021-08-01 15:10:45	None	Watched
+zSvhptfvFH0	ПРОДОЛЖЕНИЕ ПРЯТОК, ГДЕ ОТ МЕНЯ ОТКАЗАЛИСЬ ВСЕ ДРУЗЬЯ!ПРЯТКИ В PROP AND SEEK.	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=zSvhptfvFH0	2021-08-03 13:00:33	None	Watched
+Jtf0_VZZM8Q	СТРОИМ КОРОБКУ ПЕРЕДАЧ НА ПОРШНЯХ В SCRAP MECHANIC!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=Jtf0_VZZM8Q	2021-08-05 20:01:00	None	NotInterested
+O9chXOFjbaw	СТАЛ ЗАЙКОЙ - Gunfire Reborn #3	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=O9chXOFjbaw	2021-08-06 14:08:53	None	NotInterested
+jwmS127_O_E	🔴СОЛО ВЫЖИВАНИЕ В ОЖИДАНИИ ОБНОВЫ. РАЗВАЛИВАЕМ СЕРВЕР.	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=jwmS127_O_E	2021-08-06 15:36:30	None	NotInterested
+HLSepUJZYWg	КТО ИЗ ТРЁХ КОЛОБКОВ САМЫЙ КРУТОЙ?! НАЧАЛО ЭПИЧНЕЙШЕГО СРАЖЕНИЯ! ROUNDS	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=HLSepUJZYWg	2021-08-05 13:15:00	None	Watched
+Dc1V2GL44tg	ВОТ И НАСТАЛ ЧАС РАСПЛАТЫ? НАКОНЕЦ-ТО НАШЛИ КАБАНА В ГТА 5 РП (ECLIPSE GTA 5 RP)	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=Dc1V2GL44tg	2021-08-06 15:20:55	None	Watched
+MK-dOsuAxME	НОВЫЙ СПОСОБ ДОСТАВКИ ПОСЫЛОК - КАТАПУЛЬТА! ВАШЕЙ ПОЧТЕ ТАКОЕ И НЕ СНИЛОСЬ (T.R.D.S)	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=MK-dOsuAxME	2021-08-05 14:14:16	None	Watched
+O9O5ryf3Y9A	БЕГИ И ПРЯЧЬСЯ! НО СПРЯТАТЬСЯ ТУТ БЫЛО НЕ ЛЕГКО! УГАРНЫЕ ПРЯТКИ С ДРУЗЬЯМИ! (Run Prop, Run)	UCa2oFpjziUQIImcpkrflwDw	\N	https://www.youtube.com/watch?v=O9O5ryf3Y9A	2021-08-08 18:35:11	None	Watched
+Pw1T39lv3QM	САМАЯ СЛОЖНАЯ БИТВА АВТОСБОРОК В CROSSOUT!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=Pw1T39lv3QM	2021-08-06 18:22:16	None	Watched
+GLX6jwYgn3A	АДСКИЙ СПУСК В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=GLX6jwYgn3A	2021-08-05 21:26:54	None	Watched
+De6rgZeu_Ag	ЭТОТ ПОЕЗД ВЗЛОМАЛИ И ТЕПЕРЬ ЖИЗНИ ПАССАЖИРОВ ЗАВИСЯТ ОТ НАС! Operation: Tango	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=De6rgZeu_Ag	2021-07-15 14:30:03	None	None
+x0KSydHzvBo	САМЫЙ СКРЫТНЫЙ ГЕЙМПЛЕЙ В PROP AND SEEK!	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=x0KSydHzvBo	2021-08-07 19:13:03	None	Watched
+XHvZK4SuU5s	МАНЬЯК ПРОСТО НЕ ЗНАЛ ЧТО ТАК МОЖНО! И НЕ СМОГ НАС ПОЙМАТЬ! (УГАРНЫЙ МАНЬЯК В КС ГО)	UCa2oFpjziUQIImcpkrflwDw	\N	https://www.youtube.com/watch?v=XHvZK4SuU5s	2021-08-09 20:04:58	None	Watched
+WNirk33jFgA	ЗА КАДРОМ!!! (ЧАСТЬ 2)	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=WNirk33jFgA	2021-08-09 21:01:35	None	Watched
+fndD_8ngkR8	НОВОЕ ШОУ!!! УЗКО-НИЗКО В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=fndD_8ngkR8	2021-08-07 19:08:55	None	Watched
+vlfRxhxYWmU	СКОЛЬКО ДЕНЕГ ЗАРАБОТАЛ НАШ МОТОСАЛОН? ДЕЛИМ ПРИБЫЛЬ В ГТА 5 РП (ECLIPSE GTA 5 RP)	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=vlfRxhxYWmU	2021-08-09 14:55:28	None	None
+jN1ee6MDWLE	МАРСИАНЕ, АНГЕЛЫ И 15 ЛИТРОВ ► PowerWash Simulator #3	UCdKuE7a2QZeHPhDntXVZ91w	\N	https://www.youtube.com/watch?v=jN1ee6MDWLE	2021-08-10 18:00:34	None	Watched
+n1luYpFMDtY	СГОРЕВШАЯ ЖОПА КИСЫ МАНЬЯКА В CS:GO!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=n1luYpFMDtY	2021-08-12 17:50:54	None	Watched
+qPy5GVouq_k	СУПЕРМЕН ОЧЕНЬ ЗЛОЙ! ОН НЕ МОЖЕТ МЕНЯ НАЙТИ! (УГАРНЫЙ МАНЬЯК В КС ГО)	UCa2oFpjziUQIImcpkrflwDw	\N	https://www.youtube.com/watch?v=qPy5GVouq_k	2021-08-11 17:36:25	None	Watched
+k6rr0zDzDBM	КРУТОЙ СКИЛЛ ТЕСТ НА ПОРШЕ ИЗ ГТА 5 РП И ДРУГИХ ТАЧКАХ ИЗ ОБНОВЫ! ФОРСАЖ 10 В ГТА 5 ОНЛАЙН	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=k6rr0zDzDBM	2021-08-10 18:20:36	None	NotInterested
+EUsTD1xNLfY	AMONG US КОТОРЫЙ МЫ ЗАСЛУЖИЛИ	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=EUsTD1xNLfY	2021-08-10 22:04:28	None	NotInterested
+gHk3x7jLudo	ДА ОН СОВСЕМ НИЧЕГО НЕ ВИДИТ! УГАРНЫЕ ПРЯТКИ В CS:GO	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=gHk3x7jLudo	2021-07-27 13:03:23	None	Watched
+kLyZRO-HSR8	НУЖНО ДОСТАВИТЬ ВЗРЫВООПАСНУЮ ПОСЫЛКУ, НО МЫ НАШЛИ "КОРОТКУЮ ДОРОГУ" (T.R.D.S)	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=kLyZRO-HSR8	2021-07-30 19:01:11	None	Watched
+6ROmJXeK9-w	ДА ТУТ ДАЖЕ МЫШЬ НЕ СПРЯЧЕТСЯ! ПРЯТКИ В PROP AND SEEK.	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=6ROmJXeK9-w	2021-07-30 13:00:06	None	NotInterested
+Jo-MeNednAU	ТЫ НЕ УБЕЖИШЬ ОТ ЭТОГО МАНЬЯКА! ТОЛЬКО ЛИФТ МОЖЕТ МЕНЯ СПАСТИ! (УГАРНЫЙ МАНЬЯК В КС ГО)	UCa2oFpjziUQIImcpkrflwDw	\N	https://www.youtube.com/watch?v=Jo-MeNednAU	2021-07-30 18:00:15	None	Watched
+Z501iPWyEL4	АДСКИЙ ПОЛЕТ В КОСМОС!!! УГАР В GTA ONLINE!!! (УГАР, ЭПИК, БАГИ)	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=Z501iPWyEL4	2021-08-03 17:05:11	None	NotInterested
+7Zr7u5y4Up8	ДА ТУТ НЕРЕАЛЬНО НИКОГО НАЙТИ! УГАРНЫЕ ПРЯТКИ В CS:GO	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=7Zr7u5y4Up8	2021-07-14 14:55:05	None	None
+jmMSxOz3Msg	НАШЛИ КАПИТАНА ДЖЕКА УАРАБЬЯ! БИТВА С ЛЕТУЧИМ ГОЛЛАНДЦЕМ. МОРСКИЕ ПРИКЛЮЧЕНИЯ В SEA OF THIEVES.	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=jmMSxOz3Msg	2021-07-13 14:05:13	None	None
+fIuZMUyaER4	ЖРЁМ КРОШКИ И ВСЯКИЙ МУСОР В СИМУЛЯТОРЕ ТАРАКАНА! Cockroach Simulator	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=fIuZMUyaER4	2021-07-10 13:31:35	None	None
+_KPrv0LNGdw	ВОТ ЭТО МИЛЛИМЕТРАЖ! СКИЛЛ ТЕСТ НА РАДИОУПРАВЛЯЕМЫХ МАШИНКАХ В ГТА 5 ОНЛАЙН	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=_KPrv0LNGdw	2021-07-17 14:00:13	None	None
+y18dfx4owT8	НАВОДИМ КРАСОТУ НА НАШЕМ ЛАЙНЕРЕ! НАШЛИ КЛАД И МНОГО НОВЫХ ПОСЫЛОК В РАФТ(RAFT)	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=y18dfx4owT8	2021-07-16 16:05:21	None	None
+Ovv6AfddwVA	ОСТОРОЖНО, ДВЕРИ ЗАКРЫВАЮТСЯ! ЖЕСТКИЙ СПУСК С ВОРОТАМИ В ГТА 5 ОНЛАЙН	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=Ovv6AfddwVA	2021-07-15 18:31:51	None	None
+1ag6Kb3UNhY	УЧИМ ДИЗОФА ДОИТЬ КОРОВ! НОВАЯ УГАРНАЯ РАБОТА НА ФЕРМЕ В ГТА 5 РП! (ECLIPSE GTA 5 RP)	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=1ag6Kb3UNhY	2021-07-14 17:32:28	None	None
+2rlvasuHAC4	УДЛИНИЛИ КОРАБЛЬ И ПОСТАВИЛИ 4 МОТОРА, ТЕПЕРЬ ЭТО НАСТОЯЩИЙ ЛАЙНЕР! РАФТ(RAFT)	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=2rlvasuHAC4	2021-07-12 17:13:55	None	None
+-l8Fa209F_8	САМЫЙ СТРАШНЫЙ ДЕНЬ В МОЕЙ ЖИЗНИ! КООПЕРАТИВНЫЙ ХОРРОР DEVOUR	UCa2oFpjziUQIImcpkrflwDw	\N	https://www.youtube.com/watch?v=-l8Fa209F_8	2021-07-08 16:02:57	Watched	Watched
+63hiV_wARds	НА ЭТОЙ КАРТЕ  НЕРЕАЛЬНО СПРЯТАТЬСЯ! НО ОН ВСЕ РАВНО МЕНЯ НЕ НАШЕЛ! PROP AND SEEK	UCa2oFpjziUQIImcpkrflwDw	\N	https://www.youtube.com/watch?v=63hiV_wARds	2021-07-07 14:28:41	Watched	Watched
+poEs_EWoRac	ПОДРУБИЛ ЧИТЫ В СИМУЛЯТОРЕ АДСКИХ РУК!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=poEs_EWoRac	2021-07-14 17:43:05	None	None
+wffzpV2StxE	КОРОВА ТРОЛЛЬ vs НЛО В CS:GO!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=wffzpV2StxE	2021-07-16 20:04:06	None	None
+QkfC_w8SeNg	САМАЯ НЕЛЕПАЯ БИТВА В CROSSOUT!!!	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=QkfC_w8SeNg	2021-07-16 12:50:52	Watched	Watched
+--W9yuFYqSM	ТРОЛЛЬ ДОРОГА ЛОВУШЕК С ДРУЗЬЯМИ В КС ГО (CS:GO)	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=--W9yuFYqSM	2021-07-15 12:09:59	Watched	Watched
+9CN8a-CCT6o	ТЕПЕРЬ МЫ БУДЕМ БОГАТЫ! НАШЛИ СПОСОБ КАК БЫСТРО РАЗБОГАТЕТЬ БОМЖУ! (СИМУЛЯТОР БОМЖА)	UCa2oFpjziUQIImcpkrflwDw	\N	https://www.youtube.com/watch?v=9CN8a-CCT6o	2021-07-12 20:34:08	Watched	Watched
+dcodUvBMS1w	НОВОЕ ШОУ!!! СКАЛОЛАЗ В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=dcodUvBMS1w	2021-07-15 17:06:51	Watched	Watched
+9DRyIvNR_Ds	БИТВА: СТРОИМ ГОНОЧНУЮ ТАЧКУ НА ПОРШНЯХ В SCRAP MECHANIC!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=9DRyIvNR_Ds	2021-07-17 13:03:05	Watched	Watched
+U-e5pqyUwfE	ОТКРЫЛИ БОЛЬШЕ ТЫСЯЧИ УРОВНЕЙ ПРОПУСКА! РЕАЛЬНО ЛИ ВЫБИТЬ ЯХТУ? (ECLIPSE GTA 5 RP)	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=U-e5pqyUwfE	2021-07-19 17:15:21	Watched	Watched
+VVIyW0j9ZcY	КАК ДАЛЕКО ЗАЕДЕТ ПОЛОВИНА МАШИНЫ??? ЛЕСТНИЦА В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=VVIyW0j9ZcY	2021-07-30 16:57:17	None	NotInterested
+SSN_ykvf_a8	НАШЛИ ЧЕРТОВЫ АМУЛЕТЫ! ТЕПЕРЬ НАМ НЕ СТРАШНО ИГРАТЬ! (СИМУЛЯТОР БОМЖА)	UCa2oFpjziUQIImcpkrflwDw	\N	https://www.youtube.com/watch?v=SSN_ykvf_a8	2021-08-03 16:02:19	None	Watched
+jdt-lft1t1Q	СТРЕЛЯЙ ИЛИ УМРИ! СТАРЫЙ ДОБРЫЙ РЕЖИМ РПГ ПРОТИВ МАШИН В ГТА 5 ОНЛАЙН	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=jdt-lft1t1Q	2021-08-03 18:43:48	None	Watched
+eUCU9PAxV58	ДАЖЕ БАНАН ОФИГЕЛ ОТ ЭТОЙ НЫЧКИ!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=eUCU9PAxV58	2021-07-19 20:01:22	None	None
+u9i5NVUhE-8	ОЧЕНЬ ДЫРЯВАЯ СТЕНКА НА СТЕНКУ (ГТА 5 ОНЛАЙН, GTA ONLINE)	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=u9i5NVUhE-8	2021-07-20 18:04:21	None	None
+J6VWrDidnaI	ГНЕВ ЧЕЛОВЕКОВ (СКИЛЛ ТЕСТ, ГТА 5 ОНЛАЙН, GTA ONLINE)	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=J6VWrDidnaI	2021-07-17 12:20:07	NotInterested	NotInterested
+SfViq-UsdjI	ОБЫЧНЫЙ ДЕНЬ КОТЭ - Gunfire Reborn #1	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=SfViq-UsdjI	2021-07-13 15:36:07	NotInterested	NotInterested
+3tzauP4nmEk	НОВОЕ ШОУ!!! ТУДА-СЮДА В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=3tzauP4nmEk	2021-07-18 17:07:38	NotInterested	NotInterested
+W5pBO5R5SAo	ОЧЕНЬ СТРАННЫЕ ГОНКИ (ГТА 5 ОНЛАЙН, GTA ONLINE)	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=W5pBO5R5SAo	2021-06-22 11:40:40	NotInterested	NotInterested
+FfWvXPaHFHg	ЛАМПОВАЯ ИНДЮШКА С ПАСХАЛКАМИ	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=FfWvXPaHFHg	2021-06-24 13:31:55	NotInterested	NotInterested
+TM_4eAEektc	🔴 СМОТРИМ ПОСЛЕДНИЕ ОБНОВЛЕНИЯ НА GTA-GO RP.	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=TM_4eAEektc	2021-06-27 16:51:18	NotInterested	NotInterested
+7oAr_CmyiN0	КТО БЫ МОГ ПОДУМАТЬ, ЧТО DIZOFF СГОРИТ НА ЭТУ ИГРУ.. ПУГАЕМСЯ В HIDE AND SHRIEK	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=7oAr_CmyiN0	2021-06-28 14:03:11	NotInterested	NotInterested
+xpGexWB1IZw	СПАСАЕМ ЛЮДЕЙ В СИМУЛЯТОР ПОЖАРНОГО	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=xpGexWB1IZw	2021-06-30 20:24:57	NotInterested	NotInterested
+C729X4DkYzQ	У МЕНЯ УКРАЛИ УДАЧУ! ЭТО СУМАСШЕДШИЙ СПУСК ВНИЗ, А ТЫ ПРОСТО КАТИСЬ! (ГОНКИ ГТА 5 ОНЛАЙН)	UCa2oFpjziUQIImcpkrflwDw	\N	https://www.youtube.com/watch?v=C729X4DkYzQ	2021-07-10 18:53:39	NotInterested	NotInterested
+ni9I5p-RcOc	СУРОВОЕ ПРОТИВОСТОЯНИЕ ОГРОМНОЙ ТЕХНИКИ! БИТВА АВТОСБОРОК (CROSSOUT)	UCa2oFpjziUQIImcpkrflwDw	\N	https://www.youtube.com/watch?v=ni9I5p-RcOc	2021-07-18 12:00:07	NotInterested	NotInterested
+OhLhIvk41aI	ПУТЕШЕСТВИЕ ПО ПУСТЫНЕ - Gunfire Reborn #2	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=OhLhIvk41aI	2021-07-19 12:50:27	NotInterested	NotInterested
+kxyIdF8JWlg	НОВОЕ ЭПИЧНОЕ АВТО-ОГРАБЛЕНИЕ В GTA ONLINE!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=kxyIdF8JWlg	2021-07-20 18:45:22	NotInterested	NotInterested
+T6iAhMc_4BA	ОН ПРОСТО МЕНЯ НЕ НАШЕЛ! НЕУЛОВИМЫЙ МАЛЕНЬКИЙ СТАКАНЧИК! ПРЯТКИ В PROP AND SEEK	UCa2oFpjziUQIImcpkrflwDw	\N	https://www.youtube.com/watch?v=T6iAhMc_4BA	2021-06-20 18:33:30	Watched	Watched
+d216DUQwS2g	ЛЯГУШКА ПОДСТАВИЛА ДРУГА ЛЯГУШКУ!!! УГАРНЫЙ МАНЬЯК В CS:GO!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=d216DUQwS2g	2021-06-20 13:01:44	Watched	Watched
+fD5X0vD6FLc	БОЛЬШИЕ ПРОБЛЕМЫ НА МЕГАРАМПЕ! ОЛДСКУЛЬНЫЙ СПУСК НА МАКСИМАЛЬНОЙ СКОРОСТИ В ГТА 5 ОНЛАЙН!	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=fD5X0vD6FLc	2021-06-21 15:21:09	Watched	Watched
+9SyQbcGS6RY	БЕГИ, ИНАЧЕ ЕНОТЫ ТЕБЯ...	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=9SyQbcGS6RY	2021-06-21 11:01:23	Watched	Watched
+KPsexHQjqwo	Я И SODAEFFECT УСТРОИЛИ БИТВУ ПОДПИСЧИКОВ  В FIGHT PARTY	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=KPsexHQjqwo	2021-06-22 11:38:15	Watched	Watched
+YXkbAiQjgCk	ОЧЕНЬ СТРАШНО ИГРАТЬ В ЭТО В VR!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=YXkbAiQjgCk	2021-06-22 14:45:10	Watched	Watched
+O8c6RGifDWA	СОБРАЛИСЬ ВСЕЙ ТОЛПОЙ И ОТПРАВИЛИСЬ НА НОВЫЙ ЗАХВАТ! ВОЙНА СЕМЕЙ В ГТА 5 РП (ECLIPSE GTA 5 RP)	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=O8c6RGifDWA	2021-06-22 18:42:46	Watched	Watched
+C2wfkRgiry8	ШОУ: РУССКИЕ ДОРОГИ В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=C2wfkRgiry8	2021-06-22 20:55:27	Watched	Watched
+xWnGCHBaycU	РИСУЮ ГОМЕРА СИМПСОНА НА СТЕНЕ ЗА 10 СЕКУНД В VR!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=xWnGCHBaycU	2021-06-23 15:27:14	Watched	Watched
+LjTWBdh64UM	НАШЛИ НОВОГО БОМЖА В СВОЮ КОМПАШКУ! ТЕПЕРЬ ВЫЖИВАТЬ ЕЩЕ ТРУДНЕЕ! (СИМУЛЯТОР БОМЖА)	UCa2oFpjziUQIImcpkrflwDw	\N	https://www.youtube.com/watch?v=LjTWBdh64UM	2021-06-23 14:09:39	Watched	Watched
+rqOftTv5drA	МНЕ ПОЧТИ УДАЛОСЬ СПРЯТАТЬ И ВПИХНУТЬ НЕ ВПИХУЕМОЕ! ПРЯТКИ В PROP AND SEEK.	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=rqOftTv5drA	2021-07-20 09:30:12	Watched	Watched
+YaKMfK3fc_E	НОВЫЙ РЕЖИМ ДЕРБИ: ХРУПКИЙ ПОЛ! ОДНА ОШИБКА И ТЫ ПРОВАЛИШЬСЯ! ГТА 5 ОНЛАЙН	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=YaKMfK3fc_E	2021-07-20 14:22:44	Watched	Watched
+HIHiHHC7kz4	УГАДАЙТЕ, КОГО СЛЕДУЮЩЕГО Я ВЫЗВАЛ НА ДУЭЛЬ?! БИТВА КОЛОБКОВ В Rounds	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=HIHiHHC7kz4	2021-06-24 14:52:20	Watched	Watched
+j0fnX7bqehU	НОВОЕ ШОУ!!! УЗКО-НИЗКО В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=j0fnX7bqehU	2021-06-24 17:57:44	Watched	Watched
+q4eCYqVwVIc	ЗАКРЫВАЙТЕ ДВЕРИ! ОТ ЭТОГО МАНЬЯКА НАМ НЕ УБЕЖАТЬ! (УГАРНЫЙ МАНЬЯК В КС ГО)	UCa2oFpjziUQIImcpkrflwDw	\N	https://www.youtube.com/watch?v=q4eCYqVwVIc	2021-06-24 19:28:25	Watched	Watched
+gHE6fijfe_s	ОТВЕТНЫЙ БОЙ С JOE SPEEN. ЧАСТЬ 2. БИТВА КОЛОБКОВ В Rounds	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=gHE6fijfe_s	2021-06-25 15:06:27	Watched	Watched
+VjHD7VNhVj8	Я НЕНАВИЖУ ВЕТРЯКИ! СЛОЖНЫЙ СКИЛЛ ТЕСТ СО ЗЛЫМ ДИЗОФОМ В ГТА 5 ОНЛАЙН	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=VjHD7VNhVj8	2021-06-25 15:54:54	Watched	Watched
+-fN9Ic-eLz0	КАК НЕ НУЖНО ЛОВИТЬ ОПАСНОГО ПРИЗРАКА!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=-fN9Ic-eLz0	2021-06-25 13:18:04	Watched	Watched
+9-MPIpVGPmE	КАК ДУМАЕШЬ, ЧТО МНЕ МОГЛО ВЫПАСТЬ???	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=9-MPIpVGPmE	2021-06-25 21:14:02	Watched	Watched
+i2x8kV6k3sc	ЭТО БЫЛО БОЛЬНО (ГТА 5 ОНЛАЙН, GTA ONLINE)	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=i2x8kV6k3sc	2021-06-26 11:42:15	Watched	Watched
+-HTYhLgzX0E	ВЫБЕРИ НУЖНУЮ ТАЧКУ ДЛЯ ПОБЕДЫ! УГОНИ И ПОБЕДИ В ГТА 5 ОНЛАЙН	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=-HTYhLgzX0E	2021-06-29 18:27:38	Watched	Watched
+fc13ky81EDM	ВОЗВРАЩЕНИЕ В FALL GUYS И ДУЭЛЬ С РАНДОМНЫМИ КАРТОЧКАМИ В ROUNDS	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=fc13ky81EDM	2021-07-02 11:52:49	Watched	Watched
+ene5NssHtHE	БАНАН ТРОЛЛЬ vs ХИТРЫЙ ДОХЛЯК В CS:GO!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=ene5NssHtHE	2021-07-27 20:57:47	None	None
+vxAD2gPPYIM	НЕВИДИМЫЙ ЛАБИРИНТ! ТУТ ПРОСТО НЕВОЗМОЖНОЙ НАЙТИ ВЫХОД! (ГОНКИ ГТА 5 ОНЛАЙН)	UCa2oFpjziUQIImcpkrflwDw	\N	https://www.youtube.com/watch?v=vxAD2gPPYIM	2021-07-28 20:29:34	None	None
+skV2g0eghlA	УГАРНЫЕ МИНИИГРЫ С ДРУЗЬЯМИ В КС ГО (CS:GO)	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=skV2g0eghlA	2021-07-27 21:08:50	None	None
+7kw_qnB5d4k	МИНИ ТАНКИ И ХРУПКИЙ ПОЛ: СТРЕЛЯЙ ПОД ВРАГА, ЧТОБЫ ОН ПРОВАЛИЛСЯ! ГТА 5 ОНЛАЙН	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=7kw_qnB5d4k	2021-07-28 16:05:46	None	None
+KIfD4fdy9os	КВАНЕТУМ vs КРАТОС!!! БИТВА АВТОСБОРОК В CROSSOUT!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=KIfD4fdy9os	2021-07-28 17:24:11	None	Watched
+FbDYYdpn7po	ОН ПРОСТО СПРЯТАЛСЯ В ЁЛКЕ! НО У МЕНЯ ЕСТЬ ДЛЯ НЕГО ПОДАРОК! (УГАРНЫЙ МАНЬЯК В КС ГО)	UCa2oFpjziUQIImcpkrflwDw	\N	https://www.youtube.com/watch?v=FbDYYdpn7po	2021-07-27 18:33:25	None	Watched
+8jz9zY-BvcQ	ЛЕДЯНОЙ СПУСК С ПРОКЛЯТЫМ ЧЕКПОИНТОМ (ГТА 5 ОНЛАЙН, GTA ONLINE)	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=8jz9zY-BvcQ	2021-07-28 19:49:51	None	NotInterested
+kTvUHGDlIHo	ТРОЛЛИНГ ТЕЛЕПОРТОМ НЕ УДАЛСЯ!!! УГАР В CS:GO!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=kTvUHGDlIHo	2021-08-01 21:29:53	None	Watched
+jdfsQ_yGwKU	ЗА СЕКУНДУ ДО .... СТЕНКА НА СТЕНКУ В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=jdfsQ_yGwKU	2021-07-28 20:01:42	None	Watched
+CEQPNvfrvOY	ОЧЕНЬ СТРАННЫЙ СПУСК (ГТА 5 ОНЛАЙН, GTA ONLINE)	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=CEQPNvfrvOY	2021-08-03 21:07:15	None	NotInterested
+4U6mkQyeCp0	ДИЗОФ ОТРАВИЛ НАС ЯПОНСКИМ ДЕЛИКАТЕСОМ ИЗ РЫБЫ ФУГУ! ОТКРЫВАЕМ КЕЙСЫ В ГТА 5 РП (ECLIPSE GTA 5 RP)	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=4U6mkQyeCp0	2021-08-12 15:14:07	None	Watched
+YjsTGv1e5jY	ХОРРОРЫ ПО ТРИ МИНУТЫ (НЕТ)	UCdKuE7a2QZeHPhDntXVZ91w	\N	https://www.youtube.com/watch?v=YjsTGv1e5jY	2021-08-12 19:38:13	None	NotInterested
+p95X_Ux9cg4	ПРЯЧУСЬ В DBD С ПОМОЩЬЮ GFN (УГАР)	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=p95X_Ux9cg4	2021-08-12 20:57:30	None	None
+pfHQOk-v9aw	Phasmophobia ► КООП-СТРИМ #3	UCdKuE7a2QZeHPhDntXVZ91w	\N	https://www.youtube.com/watch?v=pfHQOk-v9aw	2021-08-13 22:18:55	None	None
+pP2FaYwa-vM	КАЖДЫЙ СТРОИТ СЕБЕ МАШИНУ САМ! ПОСТАВИЛ БОЛЬШОЙ СТВОЛ, ЧТОБЫ ВСЕХ ЗАПУГАТЬ В КРОССАУТ (CROSSOUT)	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=pP2FaYwa-vM	2021-08-13 15:08:11	None	None
+Z9olFfmmpTI	ЯРКАЯ СТЕНКА НА СТЕНКУ С ЛОВУШКАМИ (ГТА 5 ОНЛАЙН, GTA ONLINE)	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=Z9olFfmmpTI	2021-08-13 21:34:48	None	NotInterested
+I2mIafvxIEA	СОБРАЛИСЬ КАК ТО СЛАБОВИДЯЩИЙ, СОННЫЙ, ГЛЮЧНЫЙ И ВАЛЕНОК ВМЕСТЕ ПОИГРАТЬ В PROP AND SEEK.	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=I2mIafvxIEA	2021-08-13 15:45:01	None	Watched
+oKMUHx4q_X8	ОСТАНОВИТЬ ДОСТАВКУ ГРУЗА ЛЮБОЙ ЦЕНОЙ! СТРЕМИТЕЛЬНАЯ АВТОКОЛОННА В ГТА 5 ОНЛАЙН	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=oKMUHx4q_X8	2021-08-14 16:56:25	None	None
+vcdcvYLNPGQ	ЛЕСТНИЦА + ЛАКИ БЛОКИ В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=vcdcvYLNPGQ	2021-08-15 20:33:47	None	None
+dBGnZo4zGMk	НОВОЕ ШОУ!!! ТУДА-СЮДА В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=dBGnZo4zGMk	2021-08-13 20:53:33	None	Watched
+W1suUELeduA	УБИЙСТВЕННЫЙ АВИАДАР!!! БИТВА РАНДОМА В WAR THUNDER!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=W1suUELeduA	2021-08-17 21:14:15	None	Watched
+zCP67tLAIq4	БИТВА: СТРОИМ КОРОБКУ ПЕРЕДАЧ НА ГРУЗОВИКЕ В SCRAP MECHANIC!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=zCP67tLAIq4	2021-08-14 13:03:04	None	Watched
+lqVxyF2XLa8	ТРАТИМ ЧЕСТНО ВЫПРОШЕННЫЕ ДЕНЬГИ! ТЕПЕРЬ МЫ НЕ БУДЕМ ЗАМЕРЗАТЬ! (СИМУЛЯТОР БОМЖА)	UCa2oFpjziUQIImcpkrflwDw	\N	https://www.youtube.com/watch?v=lqVxyF2XLa8	2021-08-14 15:29:42	None	Watched
+R-PJqf72Xws	ДВА НЕБОЛЬШИХ СКИЛЛ ТЕСТА  (ГТА 5 ОНЛАЙН, GTA ONLINE)	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=R-PJqf72Xws	2021-08-14 21:15:04	None	NotInterested
+BBndMiY27gY	🔴ПОДВОДНЫЙ РЫБАК. ЛОВИМ АКУЛУ ЗА (_х_) В RUST	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=BBndMiY27gY	2021-08-15 21:33:17	None	NotInterested
+q8-TVXxjYVA	УГНАЛИ ЛАМБУ ЗА 8 МИЛЛИОНОВ! НА ЗАПРАВКЕ № 10 СНОВА БУДЕТ ВСЁ ПО 10! ГТА 5 РП (ECLIPSE GTA 5 RP)	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=q8-TVXxjYVA	2021-08-15 16:58:29	None	Watched
+GoBr0JQ5PUg	250 МИНУТ СТРАДАНИЙ И ДЫРОК В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=GoBr0JQ5PUg	2021-08-16 19:20:06	None	Watched
+ypsUC9R0mG4	Я С ДРУЗЬЯМИ ПОПАЛ В ПСИХБОЛЬНИЦУ (ХОРРОР)	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=ypsUC9R0mG4	2021-08-15 21:52:34	None	None
+xCmniSfrk4w	ЛУЧШИЕ ПОЖАРНЫЕ ШТАТА (ГТА 5 РП, RADMIR RP, УГАР)	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=xCmniSfrk4w	2021-08-16 20:16:06	None	NotInterested
+PbModaBfYII	БЫЛ НОРМАЛЬНЫЙ ДРУХ,СТАЛ КРУГЛЫМ... И ПОШЕЛ НА ЮХ.. БИТВА КОЛОБКОВ В Rounds	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=PbModaBfYII	2021-08-16 13:52:34	None	Watched
+EJAuuBVwH3c	УЖАСЫ ПИОНЕРСКИХ ЛАГЕРЕЙ ► Summer of '58 #1	UCdKuE7a2QZeHPhDntXVZ91w	\N	https://www.youtube.com/watch?v=EJAuuBVwH3c	2021-08-15 15:00:05	None	Watched
+6NWVgDAdTnQ	ТАКОЙ СПУСК ПРОЙДЕТ НЕ КАЖДЫЙ! СПУСК + СТЕНКА НА СТЕНКУ + ХПЧ С ПОЛНОЙ СЕССИЕЙ  В ГТА 5 ОНЛАЙН	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=6NWVgDAdTnQ	2021-08-16 17:17:01	None	Watched
+ba-5cp23qkg	ПОЛОВИНА МАШИНЫ vs ЛЕСТНИЦА В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=ba-5cp23qkg	2021-08-17 16:45:47	None	None
+5ij94jltXuw	МАНЬЯК ОТКАЗАЛСЯ МЕНЯ ИСКАТЬ!!! УГАР CS:GO!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=5ij94jltXuw	2021-08-15 17:42:23	None	Watched
+ulr0E4CgXCQ	СНАЧАЛА СТРАШНО, ПОТОМ СМЕШНО	UCdKuE7a2QZeHPhDntXVZ91w	\N	https://www.youtube.com/watch?v=ulr0E4CgXCQ	2021-08-18 18:00:25	None	None
+vXRim0hUx0E	Я ПРОСТО ПЫТАЛСЯ ЗАРАБОТАТЬ, А ДИЗОФФ ЗАБИРАЛ ВСЕ МОИ ДЕНЬГИ НА RADMIR RP.	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=vXRim0hUx0E	2021-08-18 13:30:08	None	None
+I6vEEEOtlXE	СТРАШНАЯ ПРАВДА ► Summer of '58 #2	UCdKuE7a2QZeHPhDntXVZ91w	\N	https://www.youtube.com/watch?v=I6vEEEOtlXE	2021-08-16 19:30:04	None	Watched
+KbZT1Q2JlEA	Valve Удалите Куриц из CS:GO	\N	\N	https://www.youtube.com/watch?v=KbZT1Q2JlEA	2021-08-21 15:01:22	None	Watched
+HBfx8gCiic8	СЖЕГ ЖОПУ ДРУГА... МЯСО В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=HBfx8gCiic8	2021-08-18 20:06:30	None	Watched
+bcbIWh1BolE	ЛУЧШЕЕ ЧТО МОГЛО ВЫПАСТЬ!!! РУССКИЕ ДОРОГИ В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=bcbIWh1BolE	2021-08-19 16:13:51	None	None
+HN6D77TUxfI	ЭТО ЖУК БОЛЬШОЙ ИЛИ МЫ МАЛЕНЬКИЕ? МЫ НАЧИНАЕМ НОВОЕ ВЫЖИВАНИЕ В GROUNDED	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=HN6D77TUxfI	2021-08-18 14:42:02	None	Watched
+1DoymnNCD5g	ГЛАЗА, КОТОРЫЕ ТЕБЯ УСЛЫШАТ	UCdKuE7a2QZeHPhDntXVZ91w	\N	https://www.youtube.com/watch?v=1DoymnNCD5g	2021-08-19 18:00:00	None	NotInterested
+F8OpaMoh_go	НОВЫЙ RAFT НА ПОЕЗДЕ!!! VOIDTRAIN!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=F8OpaMoh_go	2021-08-19 21:36:48	None	NotInterested
+BzAvnYo6XmE	ОТ МЕНЯ НЕ СПРЯЧЕШЬСЯ! МЕЛКИЙ НАКЛЗ VS ЗЛАЯ АКУЛА! (УГАРНЫЙ МАНЬЯК В КС ГО)	UCa2oFpjziUQIImcpkrflwDw	\N	https://www.youtube.com/watch?v=BzAvnYo6XmE	2021-08-20 19:05:13	None	Watched
+dYGjSXSnZOk	САМЫЕ КРУТЫЕ ГУСИ НА РАЙОНЕ - Untitled Goose Game	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=dYGjSXSnZOk	2021-08-20 21:46:04	None	Watched
+_JDTfxYcyB0	ФИНАЛЬНАЯ БИТВА ПРОТИВ ДЭВИ ДЖОНСА! МОРСКИЕ ПРИКЛЮЧЕНИЯ В SEA OF THIEVES.	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=_JDTfxYcyB0	2021-08-20 12:21:31	None	NotInterested
+_E_ffCrZsLE	ВЫ БЫЛИ ПРАВЫ, ОН БЫСТРЕЕ ВЕТРА! ПОРА БРАТЬ НОВЫЙ КРЕДИТ В ГТА 5 РП (ECLIPSE GTA 5 RP)	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=_E_ffCrZsLE	2021-08-20 14:25:38	None	Watched
+AsYKp3fxAvU	НОВЫЙ AMONG US ВМЕСТЕ С ДРУЗЬЯМИ	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=AsYKp3fxAvU	2021-08-19 22:13:09	None	NotInterested
+CjktJjp5rEM	2 vs 2!!! АДСКАЯ ДУЭЛЬ В CROSSOUT!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=CjktJjp5rEM	2021-08-20 21:46:27	None	Watched
+B1PG5uHqmtw	ТРОЛЛИНГ ТУАЛЕТОМ УДАЛСЯ!!! УГАРНЫЙ МАНЬЯК В CS:GO!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=B1PG5uHqmtw	2021-08-20 17:24:29	None	Watched
+1Pyo4QOij4w	СКИЛЛ ТЕСТ НА НОВОЙ МАЗДЕ ИЗ ОБНОВЛЕНИЯ, КОТОРАЯ НА САМОМ ДЕЛЕ ХОНДА.. ГТА 5 ОНЛАЙН	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=1Pyo4QOij4w	2021-08-19 14:33:52	None	NotInterested
+Hvqhn9Sp3Fs	НОВЫЙ ДИНАМИЧНЫЙ РЕЖИМ: СМЕРТЕЛЬНАЯ ГОНКА НА ВЫБЫВАНИЕ В ГТА 5 ОНЛАЙН	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=Hvqhn9Sp3Fs	2021-08-21 14:00:15	None	Watched
+nnv5xG7Svyg	ОГРОМНЫЙ ПАУК И ИСТОРИЯ О НЕУДАЧНОМ ПОХОДЕ В САД! ВЫЖИВАНИЕ В GROUNDED	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=nnv5xG7Svyg	2021-08-24 16:13:09	None	Watched
+C8zkWqcVrO4	НАЙТИ ПРЕДАТЕЛЯ И ВЫЖИТЬ ЛЮБОЙ ЦЕННОЙ! ВЫЖИВАНИЕ В ОПАСНОЙ ЭКСПЕДИЦИИ С ДРУЗЬЯМИ! (DREAD HUNGER)	UCa2oFpjziUQIImcpkrflwDw	\N	https://www.youtube.com/watch?v=C8zkWqcVrO4	2021-08-21 17:19:32	None	NotInterested
+QlbSYi7Bfdk	Phasmophobia ► КООП-СТРИМ #4	UCdKuE7a2QZeHPhDntXVZ91w	\N	https://www.youtube.com/watch?v=QlbSYi7Bfdk	2021-08-21 16:04:11	None	NotInterested
+GqvUNyFcApA	🔴СТРИМ. ИГРАЕМ В APEX LEGENDS И МОЖЕТ БЫТЬ С ПОДПИСЧИКАМИ🤘	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=GqvUNyFcApA	2021-08-21 18:44:23	None	NotInterested
+ztRn21LabZM	СПУСК С ОЧЕНЬ СТРАННЫМИ РАЗГОВОРАМИ (ГТА 5 ОНЛАЙН, GTA ONLINE)	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=ztRn21LabZM	2021-08-21 20:55:21	None	NotInterested
+wII4krIK2uM	МЫ ОФИГЕЛИ, КОГДА ОН ПОКАЗАЛ НА ЧТО СПОСОБЕН!!! СКАЛОЛАЗ В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=wII4krIK2uM	2021-08-22 18:27:44	None	None
+b_9JcZO3GrU	ВОТ ТАК НУЖНО ЗАБИРАТЬ НОЖИ!!! БИТВА КЕЙСОВ В CS:GO!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=b_9JcZO3GrU	2021-08-21 22:10:26	None	None
+A5h_QT6F7Ss	ПРОДАЮ СВОЮ КРАСОТКУ! ДОСАДНО, НО НУЖНЫ ДЕНЬГИ.. ГТА 5 РП (ECLIPSE GTA 5 RP)	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=A5h_QT6F7Ss	2021-08-22 15:24:43	None	Watched
+uN5iCFCQ4vI	100% СЛОЖНОСТИ В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=uN5iCFCQ4vI	2021-08-23 15:16:18	None	None
+AstZ-lsD6f4	ЗА ТАКИЕ ПРЕДМЕТЫ МЫ ЕЩЕ НЕ ПРЯТАЛИСЬ! ПРЯТКИ В PROP AND SEEK.	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=AstZ-lsD6f4	2021-08-22 14:29:13	None	Watched
+0TePJoIDygo	ЧТО СТАЛО С МИРОМ? ДОРОГА В ОДИН КОНЕЦ - VOIDTRAIN	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=0TePJoIDygo	2021-08-22 22:10:01	None	NotInterested
+otjxJVrOtBc	БИТВА ТРОЛЛЬ ПОДАРКОВ В SCRAP MECHANIC!!! ЧАСТЬ #3!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=otjxJVrOtBc	2021-08-23 21:05:05	None	None
+jRu6UIYHQHQ	СНОВА ЛЕТО! МЫ ПЕРЕЖИЛИ ЗИМУ! ТЕПЕРЬ ВСЕ СТАНЕТ ПРОЩЕ! (СИМУЛЯТОР БОМЖА)	UCa2oFpjziUQIImcpkrflwDw	\N	https://www.youtube.com/watch?v=jRu6UIYHQHQ	2021-08-23 16:28:32	None	Watched
+P4KsUWyx9tQ	НОВЫЙ УГАРНЫЙ AMONG US ВМЕСТЕ С ДРУЗЬЯМИ	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=P4KsUWyx9tQ	2021-08-23 22:33:38	None	NotInterested
+UOlTPlsc6MA	Читерские Параметры Запуска в CS:GO	\N	\N	https://www.youtube.com/watch?v=UOlTPlsc6MA	2021-08-14 14:59:36	None	Watched
+cdZZkxPzyho	ИСХОД СРАЖЕНИЯ БЫЛ НЕ ОЧЕВИДЕН! БИТВА КОЛОБКОВ В Rounds	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=cdZZkxPzyho	2021-08-24 13:45:28	None	None
+1DD1o3m3uXc	БУЛЬДОЗЕР vs ЛЕСТНИЦА В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=1DD1o3m3uXc	2021-08-24 18:55:59	None	NotInterested
+1kWW7wWb9IE	БАБКА УЖЕ СОВСЕМ НЕ ТА ► Granny 3	UCdKuE7a2QZeHPhDntXVZ91w	\N	https://www.youtube.com/watch?v=1kWW7wWb9IE	2021-08-23 18:00:01	None	NotInterested
+n_M2n6lcHs4	ПРИКЛЮЧЕНИЯ ПРОДОЛЖАЮТСЯ! И У НАС ПОЯВИЛАСЬ ПРОБЛЕМА - VOIDTRAIN #2	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=n_M2n6lcHs4	2021-08-24 21:50:09	None	Watched
+pkk8FQksqs0	НОВОЕ ШОУ!!! ПРИЛИПАЛА В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=pkk8FQksqs0	2021-08-25 20:04:34	None	None
+tpfCr5N2zaE	Х/Ф "СПИ*ДИЛИ" В НОВОМ RAFT НА ПОЕЗДЕ!!! VOIDTRAIN!!! #3	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=tpfCr5N2zaE	2021-08-25 16:48:44	None	None
+IAwL5KnhgKc	ЭТОТ СПУСК АБСОЛЮТНО НЕУПРАВЛЯЕМЫЙ! ВЕРТИКАЛЬНЫЙ "ЗАТКНИСЬ И КАТИСЬ" В ГТА 5 ОНЛАЙН	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=IAwL5KnhgKc	2021-08-25 14:46:23	None	NotInterested
+8jIjlswIWfA	ТРИ СКИЛЛ ТЕСТА ЗА ОДИН РОЛИК (ГТА 5 ОНЛАЙН, GTA ONLINE)	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=8jIjlswIWfA	2021-08-25 20:40:30	None	NotInterested
+P0GDIGb02b0	ГТА ПРО БОМЖА И ГОЛУБЕЙ ► Bum Simulator	UCdKuE7a2QZeHPhDntXVZ91w	\N	https://www.youtube.com/watch?v=P0GDIGb02b0	2021-08-26 19:47:09	None	NotInterested
+7fCKmhrkReU	НЕ ЕЗДИ НА ЧУЖИЕ ЭТАЖИ	UCdKuE7a2QZeHPhDntXVZ91w	\N	https://www.youtube.com/watch?v=7fCKmhrkReU	2021-08-25 20:15:10	None	Watched
+kP-ca8xbqww	НОВЫЙ ГЛАВНЫЙ ГЕРОЙ ► Almost My Floor #2	UCdKuE7a2QZeHPhDntXVZ91w	\N	https://www.youtube.com/watch?v=kP-ca8xbqww	2021-08-27 18:00:19	None	Watched
+to3VavrjSb4	НОВАЯ ШИКАРНАЯ ИГРА! ЗАЩИЩАЕМ ЗАМОК ОТ ОРДЫ ОРКОВ ВМЕСТЕ С JOE SPEEN. ORC MUST DIE! 3	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=to3VavrjSb4	2021-08-26 13:30:06	None	None
+sO8f2xWlC8k	К НАШЕЙ КОМАНДЕ ПРИСОЕДИНИЛСЯ ЕЩЕ ОДИН ЧЕЛОВЕК. ЗНАЕТЕ ЕГО?) ВЫЖИВАНИЕ В GROUNDED	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=sO8f2xWlC8k	2021-08-26 15:44:48	None	None
+WhxNnvNh6Jg	ТАНК vs САМОЛЕТ В WAR THUNDER!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=WhxNnvNh6Jg	2021-08-26 16:35:15	None	Watched
+ebhgAUVLB7E	У НАС ПОПОЛНЕНИЕ! ТЕПЕРЬ ЭТОТ МАЛЫШ ЖИВЕТ С НАМИ  - VOIDTRAIN	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=ebhgAUVLB7E	2021-08-26 21:58:06	None	None
+dJgqlEC0q6A	ЛУЧШИЙ РЕСТОРАН МОСКВЫ С КИТАЙСКИМИ ДОШИКАМИ!!!	\N	\N	https://www.youtube.com/watch?v=dJgqlEC0q6A	2021-08-26 11:55:53	None	Watched
+jn2Hmk9Ud_4	Phasmophobia ► КООП-СТРИМ #5	UCdKuE7a2QZeHPhDntXVZ91w	\N	https://www.youtube.com/watch?v=jn2Hmk9Ud_4	2021-08-28 15:43:18	None	NotInterested
+9jS4gMdAyo4	ЖЕСТКОЕ ДТП В GTA ONLINE!!! СТЕНКА НА СТЕНКУ!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=9jS4gMdAyo4	2021-08-26 19:50:48	None	NotInterested
+z2gh42CFxSM	ИГРАТЬ МОЖНО ДАЖЕ НА ДЕРЕВЕ!!! ROG STRIX G15 НА AMD!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=z2gh42CFxSM	2021-08-27 18:07:49	None	NotInterested
+1_3pF_qU3N8	МНЕ ВЫПАЛО ЭТО!!! БИТВА РАНДОМА В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=1_3pF_qU3N8	2021-08-27 20:43:36	None	Watched
+dZ_pPvYZyXg	ГОНКИ НА АВТОПИЛОТАХ! ЭТИ МАШИНЫ ХОТЯТ НАС ДОСТАВИТЬ ИЛИ УБИТЬ?! ГТА 5 РП (ECLIPSE GTA 5 RP)	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=dZ_pPvYZyXg	2021-08-28 14:58:00	None	Watched
+2i8Kp2fiSC0	НАСТОЯЩИЙ РУССКИЙ СПУСК! ЭТО ТЕБЕ НЕ ШУТКИ! (ГОНКИ ГТА 5 ОНЛАЙН)	UCa2oFpjziUQIImcpkrflwDw	\N	https://www.youtube.com/watch?v=2i8Kp2fiSC0	2021-08-28 14:09:22	None	NotInterested
+_Mlu4upW6Uw	ПИЦЕРИЙНЫЙ МАНЬЯК! НЕ 1 КУСОЧЕК НЕ СБЕЖИТ ОТ МЕНЯ! (УГАРНЫЙ МАНЬЯК В КС ГО)	UCa2oFpjziUQIImcpkrflwDw	\N	https://www.youtube.com/watch?v=_Mlu4upW6Uw	2021-08-29 18:49:01	None	Watched
+YedLlv-AGPo	НОВЫЕ ТРОЛЛЬ ПОДАРКИ В SCRAP MECHANIC!!! ЧАСТЬ #4!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=YedLlv-AGPo	2021-08-28 14:44:15	None	NotInterested
+-PFvw_wIj88	ЛАМПОВАЯ СТЕНКА,НА КОТОРОЙ НИКТО НИКОГО НЕ СПНУЛ И НЕ СГОРЕЛ. БОЛТАЕМ ВМЕСТЕ С ДИЗОФФОМ.ГТА 5 ОНЛАЙН	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=-PFvw_wIj88	2021-08-28 12:30:00	None	NotInterested
+knZz87XJxoU	МЫ ОБУСТРОИЛИСЬ, СТАНОВИТСЯ ВСЕ ИНТЕРЕСНЕЕ И ИНТЕРЕСНЕЕ - VOIDTRAIN	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=knZz87XJxoU	2021-08-28 21:18:52	None	Watched
+BwlzdOENuiM	САМЫЙ НЕВЕРОЯТНЫЙ ГЕЙМПЛЕЙ В PROP AND SEEK!	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=BwlzdOENuiM	2021-08-27 22:10:19	None	Watched
+kfAH18lJsLI	ОН БОЯЛСЯ, А Я УГАРАЛ!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=kfAH18lJsLI	2021-08-28 20:32:14	None	NotInterested
+oDn05hWkrBA	🔴СОЛО ВЫЖИВАНИЕ В ЖЕСТОКОМ МИРЕ RUST.	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=oDn05hWkrBA	2021-08-29 14:04:48	None	None
+cEEiJW1-NrM	СПУСК С САМОЙ ВЫСОКОЙ ГОРЫ НА ЭКСТРЕМАЛЬНОЙ СКОРОСТИ! RIDERS REPUBLIC BETA В КООПЕ	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=cEEiJW1-NrM	2021-08-29 16:32:51	None	None
+v_12HupLmus	ХУДШЕЕ МЕСТО ДЛЯ МАШИНКИ НА ПУЛЬТЕ УПРАВЛЕНИЯ!!! ПРЯЧЬ & ИЩИ В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=v_12HupLmus	2021-08-29 19:33:43	None	None
+VuQ3YhV5wzw	ВОЗВРАЩЕНИЕ САМЫХ КРУТЫХ ГУСЕЙ НА РАЙОНЕ - Untitled Goose Game	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=VuQ3YhV5wzw	2021-08-29 21:22:18	None	NotInterested
+TEJEiclIytw	НАЧАЛО ЛЕГЕНДАРНОГО СРАЖЕНИЯ ВСЕЙ БАНДЫ YTNC. БИТВА КОЛОБКОВ В Rounds	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=TEJEiclIytw	2021-08-30 13:08:09	None	Watched
+ClceWp4ze6I	Я В ШОКЕ С ЭТОЙ МАШИНЫ! ФИЗИКА ТОЖЕ.. СКИЛЛ ТЕСТ НА НОВЫХ ТАЧКАХ ИЗ ОБНОВЛЕНИЯ В ГТА 5 ОНЛАЙН	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=ClceWp4ze6I	2021-08-30 15:00:16	None	NotInterested
+zbxWsni4Q7M	РАЗВЛЕЧЕНИЯ ДЛЯ БОГАЧЕЙ ► Bum Simulator #2	UCdKuE7a2QZeHPhDntXVZ91w	\N	https://www.youtube.com/watch?v=zbxWsni4Q7M	2021-08-30 18:00:38	None	NotInterested
+LEVfh4tX0h0	Я ДУМАЛ ЧТО ЭТО ПОРАЖЕНИЕ... БИТВА АВТОСБОРОК В CROSSOUT!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=LEVfh4tX0h0	2021-08-30 17:25:42	None	Watched
+l4J7jlL41UI	ВЫЛАЗКИ НА ОСТРОВА ВСЕ ЧАЩЕ И ЧАЩЕ - VOIDTRAIN	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=l4J7jlL41UI	2021-08-30 21:43:16	None	Watched
+5iMdHFIqIHc	САМАЯ ТРАВМООПАСНАЯ КООПЕРАТИВНАЯ ИГРА! RIDERS REPUBLIC BETA	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=5iMdHFIqIHc	2021-08-31 11:30:01	None	Watched
+8_ZEnGlczYQ	ЛУЧШЕ НЕ ВХОДИ ТУДА!!! УГАРНЫЙ МАНЬЯК В CS:GO!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=8_ZEnGlczYQ	2021-08-31 14:11:24	None	Watched
+w8TWbNUA_YA	ОБЕЩАННОЕ ПРОДОЛЖЕНИЕ НАШЕГО СРАЖЕНИЯ! БИТВА КОЛОБКОВ В Rounds	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=w8TWbNUA_YA	2021-08-31 19:15:05	None	None
+3Og5dyaAQJo	АДСКИЕ ДОЛЕТУШКИ С ПРОВЕРКОЙ НА ЛАКЕРА (ГТА 5 ОНЛАЙН, GTA ONLINE)	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=3Og5dyaAQJo	2021-08-31 21:48:42	None	NotInterested
+OltyTjkZowk	ТЕПЕРЬ НАСЕКОМЫЕ НАМ НЕ СТРАШНЫ! УКРЕПЛЯЕМ БАЗУ, ЧТОБЫ БЫЛО ГДЕ НОЧЕВАТЬ (ВЫЖИВАНИЕ В GROUNDED)	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=OltyTjkZowk	2021-08-31 16:02:18	None	Watched
+zQZV-hi0m4w	ОЧЕНЬ СИЛЬНО НЕ ПОВЕЗЛО!!! УЗКО-НИЗКО В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=zQZV-hi0m4w	2021-09-02 16:30:43	None	NotInterested
+5IFkasXObEY	ТЕПЕРЬ У МЕНЯ ЕСТЬ КРУТАЯ СОБАКА! ВЫЖИВАТЬ СТАЛО ПРОЩЕ! (СИМУЛЯТОР БОМЖА)	UCa2oFpjziUQIImcpkrflwDw	\N	https://www.youtube.com/watch?v=5IFkasXObEY	2021-09-02 18:00:08	None	Watched
+gkrrH9gUXFg	ВСЕ ДУМАЛИ ЧТО ЭТО 100% ИМБА!!! БИТВА РАНДОМА В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=gkrrH9gUXFg	2021-09-04 16:30:51	None	NotInterested
+tCeJJLjioOQ	КРУТЫСЫ ► Bum Simulator #3	UCdKuE7a2QZeHPhDntXVZ91w	\N	https://www.youtube.com/watch?v=tCeJJLjioOQ	2021-09-01 18:00:25	None	None
+GWReJAbfMZI	НОВЫЙ ДИНАМИЧНЫЙ РЕЖИМ: ЗАРАЖЕННЫЕ ПРОТИВ ВЫЖИВШИХ В ГТА 5 ОНЛАЙН	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=GWReJAbfMZI	2021-09-01 17:03:30	None	Watched
+TueLwdYbmDY	НЕРЕАЛЬНЫЙ ЭКСТРЕМАЛЬНЫЙ СПУСК! КТО САМЫЙ БЫСТРЫЙ ДИНОЗАВРИК? КООП СОРЕВНОВАНИЕ В RIDERS REPUBLIC	UCa2oFpjziUQIImcpkrflwDw	\N	https://www.youtube.com/watch?v=TueLwdYbmDY	2021-08-31 23:07:28	None	Watched
+fQXBxA6F6t4	ЗАБЫТАЯ ПОДРУГА ► Almost My Floor #3	UCdKuE7a2QZeHPhDntXVZ91w	\N	https://www.youtube.com/watch?v=fQXBxA6F6t4	2021-08-31 18:33:20	None	Watched
+z6FBQm0GYoI	НЕРЕАЛЬНЫЙ СПУСК ВНИЗ! ПРОСТО КАТИСЬ И ЗАТКНИСЬ! (ГОНКИ ГТА 5 ОНЛАЙН)	UCa2oFpjziUQIImcpkrflwDw	\N	https://www.youtube.com/watch?v=z6FBQm0GYoI	2021-09-01 18:24:36	None	NotInterested
+gcFAps2e6Sw	ФИНАЛ ► Almost My Floor #4	UCdKuE7a2QZeHPhDntXVZ91w	\N	https://www.youtube.com/watch?v=gcFAps2e6Sw	2021-09-03 18:00:18	None	Watched
+73hZm3aLdOw	ОТКРЫЛИ 15000 УРОВНЕЙ ПРОПУСКА.. НА СЕРВЕРЕ ПОЯВИЛСЯ ЛАКЕР! ГТА 5 РП (ECLIPSE GTA 5 RP)	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=73hZm3aLdOw	2021-09-02 15:21:11	None	Watched
+C3h8jUBUn_w	КАК ДАЛЕКО ЗАЕДЕТ ТАНК??? СКАЛОЛАЗ В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=C3h8jUBUn_w	2021-08-31 20:29:34	None	NotInterested
+KqwO4dvYLh8	ДОЖДАЛИСЬ!!! ПРЯЧЬ & ИЩИ + БИТВА РАНДОМА В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=KqwO4dvYLh8	2021-09-01 16:09:56	None	NotInterested
+a0_ZfjuO95E	ЭТО ПРОСТО ВЕЛИКОЛЕПНЫЙ СПУСК! БЕЗУМНАЯ СКОРОСТЬ И СРАЗУ НЕСКОЛЬКО ПУТЕЙ В ГТА 5 ОНЛАЙН	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=a0_ZfjuO95E	2021-09-03 13:30:12	None	None
+TNliFjYg-zk	МЫ СОЗДАЛИ КРЮК-КОШКУ, ТЕПЕРЬ РЕСУРСЫ НИКУДА НЕ ДЕНУТСЯ ОТ НАС! - VOIDTRAIN	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=TNliFjYg-zk	2021-09-01 20:45:50	None	Watched
+WkWOglDyoCU	ПРОВЕРЯЕМ АВТОПИЛОТ У ОКТАВИИ (ГТА 5 РП, RADMIR RP, УГАР)	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=WkWOglDyoCU	2021-09-04 19:29:26	None	NotInterested
+OV955Ysbgms	ОПЯТЬ КУПЛИНОВ ИДЁТ В Genshin Impact ► СТРИМ #3	UCdKuE7a2QZeHPhDntXVZ91w	\N	https://www.youtube.com/watch?v=OV955Ysbgms	2021-09-04 13:13:50	None	NotInterested
+LkBsKR0ci78	САМЫЙ НЕВЕЗУЧИЙ ГЕЙМПЛЕЙ В PROP AND SEEK!	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=LkBsKR0ci78	2021-09-03 10:31:21	None	Watched
+ZhPJaGOwGgo	ТССС!!! ОН ИДЕТ!!! ОГРОМНЫЙ БУНКЕР vs УГАРНЫЙ МАНЬЯК В CS:GO!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=ZhPJaGOwGgo	2021-09-03 18:54:25	None	Watched
+XhMMkybG0rE	ТАКОГО ФИНАЛА ОН НЕ ОЖИДАЛ!!! БАНАН vs УГАРНЫЕ ЧЕРВЯКИ!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=XhMMkybG0rE	2021-09-03 15:16:35	None	NotInterested
+kmdnUmgkSoI	НАШ ЗАМОК ОСАЖДАЮТ СОТНИ ОРКОВ! КАК ЭТО ПОБЕДИТЬ? ORC MUST DIE! 3	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=kmdnUmgkSoI	2021-09-02 14:53:52	None	NotInterested
+3F5jCO_Dwus	🔴 СТРОИМ ДЕРЕВНЮ С ПОДПИСЧИКАМИ В RUST.	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=3F5jCO_Dwus	2021-09-04 19:56:42	None	NotInterested
+x5GPp4RJeqU	🔴КОРОТКИЙ  СТРИМ. ИГРАЕМ В APEX LEGENDS	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=x5GPp4RJeqU	2021-09-04 20:24:59	None	NotInterested
+XjINMQ3YTTo	ОНИ МНЕ НИЧЕГО НЕ СДЕЛАЮТ!!! СМЕРТЕЛЬНАЯ АВТОКОЛОННА В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=XjINMQ3YTTo	2021-09-09 20:26:42	None	Watched
+rll19YwUiaQ	НАШЛИ ГИГАНТСКИЙ ТИК ТАК! ПРОБЛЕМА С ГОЛОДОМ РЕШЕНА :) (ВЫЖИВАНИЕ В GROUNDED)	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=rll19YwUiaQ	2021-09-04 15:54:33	None	Watched
+oRgxym-Ewj4	АДСКОЕ ЦУНАМИ vs СТЕНКА НА СТЕНКУ В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=oRgxym-Ewj4	2021-09-05 21:30:04	None	None
+0XPhScj_qFk	УЗНАЛИ У ЭРОНА, КТО ЖЕ ВЫБИЛ ЯХТУ ЗА 100000000$ В ГТА 5 РП (ECLIPSE GTA 5 RP)	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=0XPhScj_qFk	2021-09-05 15:51:32	None	Watched
+YdlzAjOGyps	ЧЕСТНЫЙ ОБЗОР НА ИГРУ NARASRAKA: BLADEPOINT. NARAKA: BLADEPOINT	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=YdlzAjOGyps	2021-09-05 13:00:09	None	NotInterested
+zy1FiFsvVT8	ЗРЯ ОН ЭТО СДЕЛАЛ!!! УГАР В GANG BEASTS!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=zy1FiFsvVT8	2021-09-05 16:58:03	None	Watched
+DaaEVOAghjk	ВСТРЕТИЛИ НОВЫХ МОНСТРОВ! - VOIDTRAIN	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=DaaEVOAghjk	2021-09-06 10:20:25	None	Watched
+zQ4vtZB7UlA	МЕСТЬ ПРОДАВЦА ХОТ-ДОГОВ ► Bum Simulator #4	UCdKuE7a2QZeHPhDntXVZ91w	\N	https://www.youtube.com/watch?v=zQ4vtZB7UlA	2021-09-06 18:41:37	None	NotInterested
+4EWzGaXa8Z4	ЗДЕСЬ ЕЕ НИКТО НЕ НАШЕЛ!!! ПРЯЧЬ & ИЩИ В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=4EWzGaXa8Z4	2021-09-06 18:55:02	None	Watched
+TsNm5PhuBik	2VS2. ФИНАЛ СРАЖЕНИЯ КРУГЛЫХ! БИТВА КОЛОБКОВ В Rounds	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=TsNm5PhuBik	2021-09-07 14:15:01	None	Watched
+wGHtW5vepkE	КАК ДАЛЕКО ПРОЙДЕТ ШАГОХОД?! УЗКО-НИЗКО В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=wGHtW5vepkE	2021-09-07 20:35:24	None	None
+Otn9N6bXO4g	СТРОИМ ШИКАРНЫЙ ДОМ ИЗ ТРАВЫ, ГДЕ МЫ БУДЕМ В БЕЗОПАСНОСТИ! ВЫЖИВАНИЕ В GROUNDED	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=Otn9N6bXO4g	2021-09-07 17:16:47	None	Watched
+2WHoRajs5k8	БЕЗУМНЫЙ СКИЛЛ ТЕСТ НА ЛЕГЕНДАРНОЙ МАЗДЕ RX7 ИЗ ОБНОВЛЕНИЯ ГТА 5 ОНЛАЙН	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=2WHoRajs5k8	2021-09-06 15:27:34	None	Watched
+gLJDvTthLH8	РЕЗИДЕНТ ХИЛЛ ► Tormented Souls	UCdKuE7a2QZeHPhDntXVZ91w	\N	https://www.youtube.com/watch?v=gLJDvTthLH8	2021-09-07 18:00:32	None	Watched
+1SEwlQNI8TE	БОМЖ-СТРОИТЕЛЬ ► Bum Simulator #5	UCdKuE7a2QZeHPhDntXVZ91w	\N	https://www.youtube.com/watch?v=1SEwlQNI8TE	2021-09-08 18:00:01	None	NotInterested
+dZC30bz4Sfw	ПРОВЕРКА ИНТУИЦИИ НА СТЕНОЧНЫХ ФЛИПАХ (ГТА 5 ОНЛАЙН, GTA ONLINE)	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=dZC30bz4Sfw	2021-09-08 11:54:37	None	NotInterested
+NfHdrQXcyog	ТЫ НЕ ПОЙМАЕШЬ! ГЭНДАЛЬФ VS МАЛЕНЬКИЙ ХОББИТ! КТО ПРЯЧЕТСЯ ЛУЧШЕ! (УГАРНЫЙ МАНЬЯК В КС ГО)	UCa2oFpjziUQIImcpkrflwDw	\N	https://www.youtube.com/watch?v=NfHdrQXcyog	2021-09-08 12:29:58	None	Watched
+J-GD_viB3KA	БУТЫЛКА vs КРЫШКА МАНЬЯК В CS:GO!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=J-GD_viB3KA	2021-09-08 19:57:43	None	Deferred
+z4H1ktrk4ok	Valve Сломали CS:GO	\N	\N	https://www.youtube.com/watch?v=z4H1ktrk4ok	2021-09-04 14:59:31	None	Watched
+n6npUrpkv7w	ПОПРОБУЙ НАЙТИ ЭТИ МАЛЕНЬКИЕ, ПУКАЮЩИЕ ПРЕДМЕТЫ! PROPHUNTER	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=n6npUrpkv7w	2021-09-09 13:15:01	None	Watched
+796OGCv-ljk	ПЕРЕИГРАЛ И УНИЧТОЖИЛ!!! АРМАГЕДОН vs УГАРНЫЕ ЧЕРВЯКИ!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=796OGCv-ljk	2021-09-09 16:54:05	None	Watched
+HAC-gll5gJU	ЛЕДЯНОЙ ТРЫНДЕЦ! СПУСТИТЬСЯ БЕЗОПАСНО НЕВОЗМОЖНО! (ГОНКИ ГТА 5 ОНЛАЙН)	UCa2oFpjziUQIImcpkrflwDw	\N	https://www.youtube.com/watch?v=HAC-gll5gJU	2021-09-09 18:09:42	None	NotInterested
+7BHxmGob6IM	РАЗВЕЛИ ПАШКУ И ОТПРАВИЛИСЬ В ОПАСНЫЙ КРУИЗ НА НАШЕЙ ЯХТЕ! ГТА 5 РП (ECLIPSE GTA 5 RP)	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=7BHxmGob6IM	2021-09-10 13:54:35	None	Watched
+ynsLGCvu7Rk	САМЫЙ НЕОБЫЧНЫЙ СПУСК! ВЕЗЕТ ТОМУ КТО ВЕЗЕТ! (ГОНКИ ГТА 5 ОНЛАЙН)	UCa2oFpjziUQIImcpkrflwDw	\N	https://www.youtube.com/watch?v=ynsLGCvu7Rk	2021-09-10 18:57:02	None	None
+vpt7NHPSizQ	УГАРНАЯ ТУСНЯ С ДРУЗЬЯМИ	UCfFkXO1Tfk6Je9O5h-dvLoA	\N	https://www.youtube.com/watch?v=vpt7NHPSizQ	2021-09-10 20:02:28	None	None
+Xc3wOesJ3_s	ФИНАЛ РАННЕЙ ВЕРСИИ ► Bum Simulator #6	UCdKuE7a2QZeHPhDntXVZ91w	\N	https://www.youtube.com/watch?v=Xc3wOesJ3_s	2021-09-10 20:33:30	None	NotInterested
+BvD3VA9aLc8	УГНАТЬ ЗА 180 СЕКУНД!!! БИТВА ВОРОВ В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=BvD3VA9aLc8	2021-09-10 19:47:00	None	Watched
+nXXS6P70Uuo	НЕ, НУ КАК ВСЕГДА! СПРЯЧЬ НА САМОМ ВИДНОМ МЕСТЕ И БУДЕТ ТЕБЕ СЧАСТЬЕ! ПРЯТКИ В PROP AND SEEK.	UCiFPh9V3Tkhqj6pvk2oK_sg	\N	https://www.youtube.com/watch?v=nXXS6P70Uuo	2021-09-10 13:30:16	None	Watched
+YOllBRJJ3Lg	ТЕСТИРОВАНИЕ И РОЗЫГРЫШ ИГРОВОГО НОУТБУКА MSI Pulse GL76 11UEK	UCdKuE7a2QZeHPhDntXVZ91w	\N	https://www.youtube.com/watch?v=YOllBRJJ3Lg	2021-09-11 15:36:16	None	NotInterested
+TerRlcA-cwI	Я ВЫЖИЛ!!! УГАРНЫЕ ЧЕРВЯКИ!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=TerRlcA-cwI	2021-09-11 15:49:15	None	Watched
+FQrKVHNwbeM	ПОТУШИТЕ МОЮ ПЯТУЮ ТОЧКУ, ПОЖАЛУЙСТА! НОВЫЙ РЕЖИМ "МЯСОРУБКА" В ГТА 5 ОНЛАЙН	UCLizDDpxiFRoqTLlMyGX7lQ	\N	https://www.youtube.com/watch?v=FQrKVHNwbeM	2021-09-11 18:46:06	None	Deferred
+7Fxdf0ieJDc	САМОЕ ГЕНИРАЛЬНОЕ МЕСТО ДЛЯ НИВЫ!!! ПРЯЧЬ & ИЩИ В GTA ONLINE!!!	UC7TkMpfCCRwhi8vbTCAOw-A	\N	https://www.youtube.com/watch?v=7Fxdf0ieJDc	2021-09-11 20:31:32	None	Deferred
+\.
+
+
+--
+-- TOC entry 2861 (class 2606 OID 76705)
+-- Name: channels pk_channels; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.channels
+    ADD CONSTRAINT pk_channels PRIMARY KEY (youtube_id);
+
+
+--
+-- TOC entry 2863 (class 2606 OID 76714)
+-- Name: videos pk_videos; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.videos
+    ADD CONSTRAINT pk_videos PRIMARY KEY (youtube_id);
+
+
+--
+-- TOC entry 2864 (class 2606 OID 76715)
+-- Name: videos fk_videos_channels_channel_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.videos
+    ADD CONSTRAINT fk_videos_channels_channel_id FOREIGN KEY (channel_id) REFERENCES public.channels(youtube_id) ON DELETE CASCADE;
+
+
+-- Completed on 2021-09-11 23:32:59
+
+--
+-- PostgreSQL database dump complete
+--
+

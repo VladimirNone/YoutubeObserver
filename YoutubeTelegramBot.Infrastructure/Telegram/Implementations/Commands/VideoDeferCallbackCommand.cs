@@ -18,6 +18,8 @@ namespace YoutubeTelegramBot.Infrastructure.Telegram.Implementations.Commands
 
         public override string Name => "/defer";
 
+        public override string Description => "Колбэк для кнопки \"Отложить\"";
+
         public VideoDeferCallbackCommand(IBotService botService, IYoutubeService youtubeService, IUnitOfWork unitOfWork, ILogger logger)
             : base(botService, youtubeService, unitOfWork)
         {

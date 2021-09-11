@@ -12,6 +12,7 @@ namespace YoutubeTelegramBot.Infrastructure.Telegram.Interfaces
     public abstract class Command
     {
         public abstract string Name { get; }
+        public abstract string Description { get; }
         public string inputedData { get; set; }
         public IBotService botService { get; set; }
         public IYoutubeService youtubeService { get; set; }

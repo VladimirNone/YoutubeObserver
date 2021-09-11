@@ -8,6 +8,7 @@ namespace YoutubeTelegramBot.Infrastructure.Telegram.Interfaces
 {
     public interface IBotService
     {
+        List<Command> Commands { get; }
         TelegramBotClient Client { get; }
 
         Command GetCommand(string name);

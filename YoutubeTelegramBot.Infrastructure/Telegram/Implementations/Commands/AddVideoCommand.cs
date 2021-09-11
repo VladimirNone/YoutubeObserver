@@ -17,6 +17,8 @@ namespace YoutubeTelegramBot.Infrastructure.Telegram.Implementations.Commands
 
         public override string Name => "/addVideo";
 
+        public override string Description => "Добавляет видео по ссылке в список отслеживаемых";
+
         public AddVideoCommand(IBotService botService, IYoutubeService youtubeService, IUnitOfWork unitOfWork, ILogger logger)
             : base(botService, youtubeService, unitOfWork)
         {
@@ -42,6 +44,11 @@ namespace YoutubeTelegramBot.Infrastructure.Telegram.Implementations.Commands
                 {
                     await botService.Client.SendTextMessageAsync(message.Chat.Id, $"Video with name '{video.name}' has already been added");
                     return;
+                }
+
+                if(await unitOfWork.ChannelsRepository.GetChannelByYoutubeIdAsync(video.channel_id) is null)
+                {
+                    video.channel_id = null;
                 }
 
                 await unitOfWork.VideosRepository.AddEntityAsync(video);

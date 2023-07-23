@@ -10,7 +10,7 @@ namespace YoutubeTelegramBot.Infrastructure
     {
         public static string[] ParseTelegramInput(string text)
         {
-             var res = new string[2];
+            var res = new string[2];
 
             if (text.StartsWith('/'))
             {

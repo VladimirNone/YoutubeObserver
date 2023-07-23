@@ -47,6 +47,11 @@ namespace YoutubeTelegramBot.Controllers
                 input = update.CallbackQuery.Data;
             }
             
+            if(input == null)
+            {
+                return Ok();
+            }
+
             var messageText = ControllerHelper.ParseTelegramInput(input);
 
             var command = BotService.GetCommand(messageText[0]);

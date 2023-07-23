@@ -31,7 +31,13 @@ namespace YoutubeTelegramBot.Infrastructure.Telegram.Implementations.Commands
                 return;
             }
 
-            var channel = (await youtubeService.SearchChannelsByNameAsync(inputedData))[0];
+            var channel = (await youtubeService.SearchChannelsByNameAsync(inputedData))?.FirstOrDefault();
+
+            if(channel == null)
+            {
+                await botService.Client.SendTextMessageAsync(message.Chat.Id, $"Channel with such name weren't founded");
+                return;
+            }
 
             if(await unitOfWork.ChannelsRepository.ChannelTracked(channel.youtube_id))
             {

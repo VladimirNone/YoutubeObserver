@@ -26,12 +26,23 @@ namespace YoutubeTelegramBot.Infrastructure.Youtube.Implementations
 
         }
 
-        public async Task<List<Channel>> SearchChannelsByNameAsync(string name, bool exactly)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="exactly">Точно указано имя или нет</param>
+        /// <returns></returns>
+        public async Task<List<Channel>> SearchChannelsByNameAsync(string name, bool exactly = true)
         {
             var l = youtubeService.Search.List("snippet");
             l.Q = name;
             l.Type = "channel";
             var res = await l.ExecuteAsync();
+
+            if(res.Items.Count == 0)
+            {
+                return null;
+            }
 
             if (exactly)
             {
